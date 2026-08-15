@@ -439,17 +439,39 @@ h2.section-title em,
   pointer-events: none;
 }
 
-.hero-logo-mark {
+.hero-bg {
   position: absolute;
-  right: -4vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: clamp(340px, 44vw, 700px);
-  opacity: 0.16;
-  mix-blend-mode: screen;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 74% 60%;
+  opacity: 0.8;
   pointer-events: none;
   user-select: none;
-  filter: saturate(0.9);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 42%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 42%);
+}
+
+/* melts the artwork into the page background on every side */
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, var(--bg) 0%, rgba(10, 10, 9, 0) 16%),
+    linear-gradient(0deg, var(--bg) 4%, rgba(10, 10, 9, 0) 34%),
+    linear-gradient(90deg, var(--bg) 0%, rgba(10, 10, 9, 0.55) 30%, rgba(10, 10, 9, 0) 60%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero .scroll-cue {
+  z-index: 2;
 }
 
 .hero-eyebrow {
@@ -1636,8 +1658,16 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
 
-  .hero-logo-mark {
-    opacity: 0.1;
+  .hero-bg {
+    object-position: 64% 55%;
+    opacity: 0.55;
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(180deg, var(--bg) 0%, rgba(10, 10, 9, 0) 18%),
+      linear-gradient(0deg, var(--bg) 4%, rgba(10, 10, 9, 0) 42%),
+      linear-gradient(90deg, rgba(10, 10, 9, 0.88) 0%, rgba(10, 10, 9, 0.45) 48%, rgba(10, 10, 9, 0.12) 100%);
   }
 }
 
@@ -1726,11 +1756,12 @@ body.modal-open {
       <!-- ================= HERO ================= -->
       <section class="hero">
         <img
-          class="hero-logo-mark"
-          src="https://nanakaddonyarko.com/wp-content/uploads/2025/05/NK-logo-white.png"
+          class="hero-bg"
+          src="./assets/images/hero-cube.jpg"
           alt=""
           aria-hidden="true"
         />
+        <div class="hero-shade" aria-hidden="true"></div>
         <div class="container">
           <p class="hero-eyebrow">Media Editor · Video &amp; Motion</p>
           <h1 class="hero-name">
