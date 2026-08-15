@@ -1439,6 +1439,163 @@ h2.section-title em,
   }
 }
 
+/* ---------- Play showreel button ---------- */
+.play-reel {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.play-reel-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  display: grid;
+  place-items: center;
+  transition: background 0.35s, border-color 0.35s, color 0.35s,
+    transform 0.5s var(--ease);
+  animation: ringpulse 2.6s ease-out infinite;
+}
+
+.play-reel-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  margin-left: 3px;
+}
+
+.play-reel:hover .play-reel-icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #171207;
+  transform: scale(1.07);
+  animation-play-state: paused;
+}
+
+.play-reel-text {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.play-reel-text em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+@keyframes ringpulse {
+  0% { box-shadow: 0 0 0 0 rgba(232, 163, 61, 0.35); }
+  70% { box-shadow: 0 0 0 16px rgba(232, 163, 61, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(232, 163, 61, 0); }
+}
+
+/* ---------- In-site video lightbox ---------- */
+.thumb {
+  cursor: pointer;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.reel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease), visibility 0s 0.4s;
+}
+
+.reel-modal.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s var(--ease);
+}
+
+.reel-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 5, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.reel-dialog {
+  position: relative;
+  width: min(1040px, 100%);
+  transform: translateY(26px) scale(0.97);
+  transition: transform 0.5s var(--ease);
+}
+
+.reel-modal.open .reel-dialog {
+  transform: none;
+}
+
+.reel-frame {
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 50px 120px -30px rgba(0, 0, 0, 0.9);
+}
+
+.reel-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.reel-close {
+  position: absolute;
+  top: -54px;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s,
+    transform 0.4s var(--ease);
+}
+
+.reel-close:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #171207;
+  transform: rotate(90deg);
+}
+
+.reel-caption {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1020px) {
   .nav-links {
@@ -1588,6 +1745,20 @@ h2.section-title em,
           <div class="hero-ctas">
             <a href="#work" class="btn btn-solid">View Work ↓</a>
             <a href="#contact" class="btn btn-ghost">Contact Me</a>
+            <button
+              class="play-reel"
+              type="button"
+              data-reel="1079959657"
+              data-title="Showreel — No Limit to Perfection"
+            >
+              <span class="play-reel-icon">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+              <span class="play-reel-text">
+                Play Showreel
+                <em>00:57</em>
+              </span>
+            </button>
           </div>
           <div class="hero-meta">
             <div>
@@ -2431,6 +2602,77 @@ h2.section-title em,
                     <label for="f-deadline">Deadline</label>
                     <input id="f-deadline" name="deadline" type="date" />
                   </div>
+                  <div class="field">
+                    <label for="f-color">Color Style / Palette</label>
+                    <input id="f-color" name="color" type="text" placeholder="e.g. teal & orange, moody…" />
+                  </div>
+                  <div class="field">
+                    <label for="f-motion">Motion Graphics</label>
+                    <select id="f-motion" name="motion">
+                      <option value="" disabled selected>Select</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-captions">Animated Captions</label>
+                    <select id="f-captions" name="captions">
+                      <option value="" disabled selected>Select</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Only key moments</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-sound">Sound Design</label>
+                    <select id="f-sound" name="sound">
+                      <option value="" disabled selected>Select</option>
+                      <option>Full sound design</option>
+                      <option>Basic mix</option>
+                      <option>No</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-grade">Color Grade</label>
+                    <select id="f-grade" name="grade">
+                      <option value="" disabled selected>Select</option>
+                      <option>Cinematic</option>
+                      <option>Natural / clean</option>
+                      <option>Brand palette</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-revisions">Revision Rounds</label>
+                    <select id="f-revisions" name="revisions">
+                      <option value="" disabled selected>Select</option>
+                      <option>1 round</option>
+                      <option>2 rounds</option>
+                      <option>3 rounds</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-export">Export Resolution</label>
+                    <select id="f-export" name="export">
+                      <option value="" disabled selected>Select</option>
+                      <option>1080p</option>
+                      <option>4K</option>
+                      <option>Both</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-files">Project / Source Files</label>
+                    <select id="f-files" name="files">
+                      <option value="" disabled selected>Select</option>
+                      <option>Required</option>
+                      <option>Not required</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
                   <div class="field full">
                     <label for="f-footage">Raw Footage Link</label>
                     <input id="f-footage" name="footage" type="url" placeholder="Drive / Dropbox link" />
@@ -2486,6 +2728,30 @@ h2.section-title em,
         </div>
       </div>
     </footer>
+
+    <!-- In-site video lightbox -->
+    <div
+      class="reel-modal"
+      id="reel-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-label="Video player"
+    >
+      <div class="reel-backdrop" data-close></div>
+      <div class="reel-dialog">
+        <button class="reel-close" data-close aria-label="Close player">✕</button>
+        <div class="reel-frame">
+          <iframe
+            src=""
+            title="Vimeo video player"
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="reel-caption"></p>
+      </div>
+    </div>
 
     <script>
 /* Nana Koranteng — Media Editor Portfolio */
@@ -2630,6 +2896,56 @@ h2.section-title em,
       form.reset();
     });
   }
+
+  /* In-site Vimeo lightbox — clicking any project thumbnail (or the hero
+     showreel button) plays the video in a modal, without leaving the page */
+  const modal = document.querySelector(".reel-modal");
+  const modalFrame = modal ? modal.querySelector("iframe") : null;
+  const modalCaption = modal ? modal.querySelector(".reel-caption") : null;
+
+  const openReel = (id, title) => {
+    if (!modal || !modalFrame || !id) return;
+    modalFrame.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0&color=e8a33d`;
+    if (modalCaption) modalCaption.textContent = title || "";
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  };
+
+  const closeReel = () => {
+    if (!modal || !modalFrame) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    setTimeout(() => {
+      modalFrame.src = "";
+    }, 350);
+  };
+
+  document.querySelectorAll(".project-card .thumb").forEach((thumb) => {
+    thumb.addEventListener("click", (e) => {
+      e.preventDefault();
+      const match = (thumb.getAttribute("href") || "").match(/vimeo\.com\/(\d+)/);
+      const title = thumb
+        .closest(".project-card")
+        ?.querySelector("h4")
+        ?.textContent.trim();
+      openReel(match ? match[1] : null, title);
+    });
+  });
+
+  document.querySelectorAll("[data-reel]").forEach((el) =>
+    el.addEventListener("click", () => openReel(el.dataset.reel, el.dataset.title))
+  );
+
+  if (modal) {
+    modal.querySelectorAll("[data-close]").forEach((el) =>
+      el.addEventListener("click", closeReel)
+    );
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeReel();
+  });
 })();
 
 </script>

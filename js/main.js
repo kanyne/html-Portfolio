@@ -140,4 +140,54 @@
       form.reset();
     });
   }
+
+  /* In-site Vimeo lightbox — clicking any project thumbnail (or the hero
+     showreel button) plays the video in a modal, without leaving the page */
+  const modal = document.querySelector(".reel-modal");
+  const modalFrame = modal ? modal.querySelector("iframe") : null;
+  const modalCaption = modal ? modal.querySelector(".reel-caption") : null;
+
+  const openReel = (id, title) => {
+    if (!modal || !modalFrame || !id) return;
+    modalFrame.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0&color=e8a33d`;
+    if (modalCaption) modalCaption.textContent = title || "";
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  };
+
+  const closeReel = () => {
+    if (!modal || !modalFrame) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    setTimeout(() => {
+      modalFrame.src = "";
+    }, 350);
+  };
+
+  document.querySelectorAll(".project-card .thumb").forEach((thumb) => {
+    thumb.addEventListener("click", (e) => {
+      e.preventDefault();
+      const match = (thumb.getAttribute("href") || "").match(/vimeo\.com\/(\d+)/);
+      const title = thumb
+        .closest(".project-card")
+        ?.querySelector("h4")
+        ?.textContent.trim();
+      openReel(match ? match[1] : null, title);
+    });
+  });
+
+  document.querySelectorAll("[data-reel]").forEach((el) =>
+    el.addEventListener("click", () => openReel(el.dataset.reel, el.dataset.title))
+  );
+
+  if (modal) {
+    modal.querySelectorAll("[data-close]").forEach((el) =>
+      el.addEventListener("click", closeReel)
+    );
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeReel();
+  });
 })();

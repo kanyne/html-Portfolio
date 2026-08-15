@@ -89,6 +89,20 @@
           <div class="hero-ctas">
             <a href="#work" class="btn btn-solid">View Work ↓</a>
             <a href="#contact" class="btn btn-ghost">Contact Me</a>
+            <button
+              class="play-reel"
+              type="button"
+              data-reel="1079959657"
+              data-title="Showreel — No Limit to Perfection"
+            >
+              <span class="play-reel-icon">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+              <span class="play-reel-text">
+                Play Showreel
+                <em>00:57</em>
+              </span>
+            </button>
           </div>
           <div class="hero-meta">
             <div>
@@ -932,6 +946,77 @@
                     <label for="f-deadline">Deadline</label>
                     <input id="f-deadline" name="deadline" type="date" />
                   </div>
+                  <div class="field">
+                    <label for="f-color">Color Style / Palette</label>
+                    <input id="f-color" name="color" type="text" placeholder="e.g. teal & orange, moody…" />
+                  </div>
+                  <div class="field">
+                    <label for="f-motion">Motion Graphics</label>
+                    <select id="f-motion" name="motion">
+                      <option value="" disabled selected>Select</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-captions">Animated Captions</label>
+                    <select id="f-captions" name="captions">
+                      <option value="" disabled selected>Select</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Only key moments</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-sound">Sound Design</label>
+                    <select id="f-sound" name="sound">
+                      <option value="" disabled selected>Select</option>
+                      <option>Full sound design</option>
+                      <option>Basic mix</option>
+                      <option>No</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-grade">Color Grade</label>
+                    <select id="f-grade" name="grade">
+                      <option value="" disabled selected>Select</option>
+                      <option>Cinematic</option>
+                      <option>Natural / clean</option>
+                      <option>Brand palette</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-revisions">Revision Rounds</label>
+                    <select id="f-revisions" name="revisions">
+                      <option value="" disabled selected>Select</option>
+                      <option>1 round</option>
+                      <option>2 rounds</option>
+                      <option>3 rounds</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-export">Export Resolution</label>
+                    <select id="f-export" name="export">
+                      <option value="" disabled selected>Select</option>
+                      <option>1080p</option>
+                      <option>4K</option>
+                      <option>Both</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="f-files">Project / Source Files</label>
+                    <select id="f-files" name="files">
+                      <option value="" disabled selected>Select</option>
+                      <option>Required</option>
+                      <option>Not required</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
                   <div class="field full">
                     <label for="f-footage">Raw Footage Link</label>
                     <input id="f-footage" name="footage" type="url" placeholder="Drive / Dropbox link" />
@@ -987,6 +1072,30 @@
         </div>
       </div>
     </footer>
+
+    <!-- In-site video lightbox -->
+    <div
+      class="reel-modal"
+      id="reel-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-label="Video player"
+    >
+      <div class="reel-backdrop" data-close></div>
+      <div class="reel-dialog">
+        <button class="reel-close" data-close aria-label="Close player">✕</button>
+        <div class="reel-frame">
+          <iframe
+            src=""
+            title="Vimeo video player"
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="reel-caption"></p>
+      </div>
+    </div>
 
     <script src="./js/main.js"></script>
   </body>
