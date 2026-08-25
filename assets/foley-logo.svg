@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1667" width="1000" height="1667">
+  <!-- FOLEY CAFE & BAR - vectorized logo, transparent background -->
+  <g stroke="#9C8B3A" fill="none" stroke-width="15" stroke-linejoin="miter" stroke-linecap="butt">
+    <!-- center spine -->
+    <path d="M500,152 L500,985"/>
+    <!-- center blade -->
+    <path d="M500,152 L398,293 L500,985"/>
+    <path d="M500,152 L602,293 L500,985"/>
+    <!-- inner chevrons (ends land on center-blade edges) -->
+    <path d="M404,320 L500,252 L596,320"/>
+    <path d="M410,376 L500,310 L590,376"/>
+    <!-- inner long lines -->
+    <path d="M410,376 L497,972"/>
+    <path d="M590,376 L503,972"/>
+    <!-- mid blades (join at center-blade shoulders) -->
+    <path d="M398,293 L245,462 L500,985"/>
+    <path d="M602,293 L755,462 L500,985"/>
+    <!-- outer blades (join at mid-blade corners) -->
+    <path d="M245,462 L180,622 L500,985"/>
+    <path d="M755,462 L820,622 L500,985"/>
+  </g>
+
+  <!-- FOLEY -->
+  <g stroke="#9C8B3A" fill="none" stroke-width="16" stroke-linecap="square">
+    <!-- F -->
+    <path d="M139,1105 L139,1380"/>
+    <path d="M139,1113 L210,1113"/>
+    <path d="M139,1236 L200,1236"/>
+    <!-- O -->
+    <rect x="294" y="1105" width="104" height="275" rx="50"/>
+    <!-- L -->
+    <path d="M482,1105 L482,1380 L557,1380"/>
+    <!-- E -->
+    <path d="M637,1105 L637,1380"/>
+    <path d="M637,1113 L712,1113"/>
+    <path d="M637,1242 L702,1242"/>
+    <path d="M637,1372 L712,1372"/>
+    <!-- Y -->
+    <path d="M792,1105 L846,1250 L900,1105"/>
+    <path d="M846,1250 L846,1380"/>
+  </g>
+
+  <!-- CAFE & BAR -->
+  <g stroke="#9C8B3A" fill="none" stroke-width="10" stroke-linecap="square">
+    <!-- C -->
+    <path d="M204,1474 A30,36 0 1 0 204,1528"/>
+    <!-- A -->
+    <path d="M244,1540 L274,1462 L304,1540"/>
+    <path d="M257,1508 L291,1508"/>
+    <!-- F -->
+    <path d="M344,1462 L344,1540"/>
+    <path d="M344,1467 L389,1467"/>
+    <path d="M344,1500 L381,1500"/>
+    <!-- E -->
+    <path d="M429,1462 L429,1540"/>
+    <path d="M429,1467 L479,1467"/>
+    <path d="M429,1501 L471,1501"/>
+    <path d="M429,1535 L479,1535"/>
+    <!-- & -->
+    <path d="M580,1470 A14.4,14.4 0 1 0 580,1487"/>
+    <path d="M580,1487 L590,1500"/>
+    <path d="M590,1500 A22.8,22.8 0 1 0 590,1539"/>
+    <path d="M590,1539 L598,1540"/>
+    <path d="M588,1505 L551,1540"/>
+    <!-- B -->
+    <path d="M665,1462 L665,1540"/>
+    <path d="M665,1462 L687,1462 A19.5,19.5 0 0 1 687,1501 L665,1501"/>
+    <path d="M687,1501 A19.5,19.5 0 0 1 687,1540 L665,1540"/>
+    <!-- A -->
+    <path d="M757,1540 L787,1462 L817,1540"/>
+    <path d="M770,1508 L804,1508"/>
+    <!-- R -->
+    <path d="M857,1462 L857,1540"/>
+    <path d="M857,1462 L879,1462 A20,20 0 0 1 879,1502 L857,1502"/>
+    <path d="M879,1502 L907,1540"/>
+  </g>
+</svg>
