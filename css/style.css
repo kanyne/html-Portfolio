@@ -257,7 +257,7 @@ h2.section-title em,
 }
 
 .brand-logo {
-  height: 40px;
+  height: 46px;
   width: auto;
   object-fit: contain;
   /* the logo art is white on black: screen blend melts the black
@@ -486,8 +486,7 @@ h2.section-title em,
 
 .hero-name .line > span {
   display: inline-block;
-  transform: translateY(110%);
-  animation: rise 1.1s var(--ease) forwards;
+  animation: rise 1.1s var(--ease) both;
 }
 
 .hero-name .line:nth-child(2) > span {
@@ -502,6 +501,7 @@ h2.section-title em,
 }
 
 @keyframes rise {
+  from { transform: translateY(110%); }
   to { transform: translateY(0); }
 }
 
@@ -1354,6 +1354,20 @@ h2.section-title em,
 .footer-brand img {
   height: 46px;
   mix-blend-mode: screen;
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-brand-text strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .footer-brand .tag {

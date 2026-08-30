@@ -8,11 +8,9 @@
       name="description"
       content="Nana Koranteng is a media editor crafting cinematic edits, commercials, trailers, motion graphics and 3D — no limit to perfection."
     />
-    <!-- Logo note: the NK logo is served from your own site
-         (nanakaddonyarko.com). It is white-on-black artwork, so CSS
-         `mix-blend-mode: screen` removes the black and blends it
-         seamlessly into the dark design. Drop a local copy at
-         assets/images/nk-logo.png later and swap the src if you prefer. -->
+    <!-- The NK logo ships locally at assets/images/nk-logo.png and melts
+         into the dark UI via mix-blend-mode: screen. To use your original
+         artwork, simply overwrite that file with your own PNG. -->
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0a09'/%3E%3Cpath d='M5 17 27 5 19 27 15.5 18.5z' fill='%23e8a33d'/%3E%3C/svg%3E"
@@ -283,7 +281,7 @@ h2.section-title em,
 }
 
 .brand-logo {
-  height: 40px;
+  height: 46px;
   width: auto;
   object-fit: contain;
   /* the logo art is white on black: screen blend melts the black
@@ -512,8 +510,7 @@ h2.section-title em,
 
 .hero-name .line > span {
   display: inline-block;
-  transform: translateY(110%);
-  animation: rise 1.1s var(--ease) forwards;
+  animation: rise 1.1s var(--ease) both;
 }
 
 .hero-name .line:nth-child(2) > span {
@@ -528,6 +525,7 @@ h2.section-title em,
 }
 
 @keyframes rise {
+  from { transform: translateY(110%); }
   to { transform: translateY(0); }
 }
 
@@ -1382,6 +1380,20 @@ h2.section-title em,
   mix-blend-mode: screen;
 }
 
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-brand-text strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .footer-brand .tag {
   font-family: var(--font-serif);
   font-style: italic;
@@ -1721,7 +1733,7 @@ body.modal-open {
         <a href="#top" class="brand" aria-label="Nana Koranteng — home">
           <img
             class="brand-logo"
-            src="https://nanakaddonyarko.com/wp-content/uploads/2025/05/NK-logo-white.png"
+            src="./assets/images/nk-logo.png"
             alt="NK logo"
           />
           <span class="brand-text">
@@ -2742,10 +2754,13 @@ body.modal-open {
         <div class="footer-top">
           <a href="#top" class="footer-brand">
             <img
-              src="https://nanakaddonyarko.com/wp-content/uploads/2025/05/NK-logo-white.png"
+              src="./assets/images/nk-logo.png"
               alt="NK logo"
             />
-            <span class="tag">No limit to perfection.</span>
+            <span class="footer-brand-text">
+              <strong>Nana Koranteng</strong>
+              <span class="tag">No limit to perfection.</span>
+            </span>
           </a>
           <nav class="footer-links" aria-label="Footer">
             <a href="#work">Work</a>

@@ -8,11 +8,9 @@
       name="description"
       content="Nana Koranteng is a media editor crafting cinematic edits, commercials, trailers, motion graphics and 3D — no limit to perfection."
     />
-    <!-- Logo note: the NK logo is served from your own site
-         (nanakaddonyarko.com). It is white-on-black artwork, so CSS
-         `mix-blend-mode: screen` removes the black and blends it
-         seamlessly into the dark design. Drop a local copy at
-         assets/images/nk-logo.png later and swap the src if you prefer. -->
+    <!-- The NK logo ships locally at assets/images/nk-logo.png and melts
+         into the dark UI via mix-blend-mode: screen. To use your original
+         artwork, simply overwrite that file with your own PNG. -->
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0a09'/%3E%3Cpath d='M5 17 27 5 19 27 15.5 18.5z' fill='%23e8a33d'/%3E%3C/svg%3E"
@@ -32,7 +30,7 @@
         <a href="#top" class="brand" aria-label="Nana Koranteng — home">
           <img
             class="brand-logo"
-            src="https://nanakaddonyarko.com/wp-content/uploads/2025/05/NK-logo-white.png"
+            src="./assets/images/nk-logo.png"
             alt="NK logo"
           />
           <span class="brand-text">
@@ -1053,10 +1051,13 @@
         <div class="footer-top">
           <a href="#top" class="footer-brand">
             <img
-              src="https://nanakaddonyarko.com/wp-content/uploads/2025/05/NK-logo-white.png"
+              src="./assets/images/nk-logo.png"
               alt="NK logo"
             />
-            <span class="tag">No limit to perfection.</span>
+            <span class="footer-brand-text">
+              <strong>Nana Koranteng</strong>
+              <span class="tag">No limit to perfection.</span>
+            </span>
           </a>
           <nav class="footer-links" aria-label="Footer">
             <a href="#work">Work</a>
