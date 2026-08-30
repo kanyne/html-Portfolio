@@ -257,7 +257,7 @@ h2.section-title em,
 }
 
 .brand-logo {
-  height: 46px;
+  height: 54px;
   width: auto;
   object-fit: contain;
   /* the logo art is white on black: screen blend melts the black
@@ -1352,7 +1352,7 @@ h2.section-title em,
 }
 
 .footer-brand img {
-  height: 46px;
+  height: 62px;
   mix-blend-mode: screen;
 }
 
