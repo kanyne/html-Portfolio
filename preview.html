@@ -97,8 +97,8 @@ textarea {
 }
 
 ::selection {
-  background: var(--accent);
-  color: #14100a;
+  background: rgba(232, 163, 61, 0.35);
+  color: var(--ink);
 }
 
 ::-webkit-scrollbar {
@@ -500,6 +500,9 @@ h2.section-title em,
   letter-spacing: -0.025em;
   text-transform: uppercase;
   margin: 26px 0 34px;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 .hero-name .line {
