@@ -1,0 +1,21 @@
+{
+  "name": "Colosseum Berlin — Events",
+  "short_name": "Colosseum",
+  "description": "Book tickets, explore venues, check in with QR and navigate Colosseum Event Berlin.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "categories": ["events", "entertainment", "travel"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "My tickets", "url": "/checkin" },
+    { "name": "What's on", "url": "/events" },
+    { "name": "Navigate", "url": "/navigate" }
+  ]
+}
