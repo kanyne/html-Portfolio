@@ -19,11 +19,17 @@ export type Venue = {
 };
 
 const IMG = {
-  atrium: '/img/hero-atrium.jpg',
+  atrium: '/img/atrium.jpg',
   wagenhalle: '/img/wagenhalle.jpg',
+  wagenhalle2: '/img/wagenhalle-2.jpg',
+  wagenhalle3: '/img/wagenhalle-3.jpg',
+  bar: '/img/bar.jpg',
   galerie: '/img/galerie.jpg',
+  galerie2: '/img/galerie-2.jpg',
   saal1: '/img/saal1.jpg',
-  kino: '/img/kino6.jpg',
+  saal1Stage: '/img/saal1-stage.jpg',
+  kino: '/img/kino.jpg',
+  kinoFoyer: '/img/kino-foyer.jpg',
   foyer: '/img/foyer.jpg',
 };
 
@@ -51,7 +57,7 @@ export const VENUES: Venue[] = [
     color: '#E31C1C',
     description:
       'A historic carriage hall of honest brick and steel — the largest open space of the house. Freely configurable for galas, product launches, markets, exhibitions and corporate gatherings, with gastronomy included.',
-    images: [IMG.wagenhalle, IMG.atrium, IMG.foyer],
+    images: [IMG.wagenhalle, IMG.wagenhalle3, IMG.bar, IMG.wagenhalle2, IMG.atrium],
     specs: [
       { label: 'Area', value: '1,400 m²' },
       { label: 'Ceiling height', value: '12 m' },
@@ -74,7 +80,7 @@ export const VENUES: Venue[] = [
     color: '#F5A623',
     description:
       'An elegant upper-floor gallery with its own entrance, wheelchair-accessible elevator and two large outdoor terraces — ideal for receptions, dinners with a view and break-out spaces.',
-    images: [IMG.galerie, IMG.atrium, IMG.foyer],
+    images: [IMG.galerie, IMG.galerie2, IMG.foyer, IMG.kinoFoyer, IMG.bar],
     specs: [
       { label: 'Area', value: '800 m²' },
       { label: 'Floor', value: '2nd floor' },
@@ -97,7 +103,7 @@ export const VENUES: Venue[] = [
     color: '#2D5F6F',
     description:
       'Nine additional screens from an intimate 122-seat room to the 454-seat Hall 10. All halls can be rented dressed (full cinema) or undressed for screenings, presentations, workshops and gaming events.',
-    images: [IMG.kino, IMG.saal1, IMG.atrium],
+    images: [IMG.kino, IMG.kinoFoyer, IMG.saal1Stage, IMG.foyer, IMG.galerie2],
     specs: [
       { label: 'Halls', value: '9 (Hall 2–10)' },
       { label: 'Total area', value: '≈ 4,000 m²' },
@@ -121,7 +127,7 @@ export const VENUES: Venue[] = [
     color: '#E31C1C',
     description:
       'The flagship premiere cinema: 525 seats, a full stage, its own entrance and a ~500 m² foyer. Detached from the rest of the building, so it can run in parallel with — or entirely without — the other spaces.',
-    images: [IMG.saal1, IMG.foyer, IMG.atrium],
+    images: [IMG.saal1, IMG.saal1Stage, IMG.kino, IMG.atrium, IMG.foyer],
     specs: [
       { label: 'Cinema', value: '535 m²' },
       { label: 'Foyer', value: '≈ 500 m²' },
