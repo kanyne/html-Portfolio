@@ -74,6 +74,18 @@ and checks each hall has a map pin reachable from the street.
 The cinema level draws all nine kino halls individually, sized roughly in proportion to their real
 floor area, arranged around the central Kinosäle foyer that every hall opens off.
 
+## 360° virtual tour
+
+The Navigate tab embeds the venue's official nexpics/mediaglobe panorama tour
+(`src/data/tour.ts`). The player takes a deep-link hash — `#media-name=<scene>&yaw&pitch&fov` —
+so all eight scenes are addressable, and each is mapped to its floor-plan node: tapping a pin for
+the Wagenhalle, Galerie, Saal 1, Saal 4, Saal 10 or the Kinosäle foyer offers **"Look inside in
+360°"**, which scrolls to the viewer and loads that panorama. Venue pages link to their own scene.
+
+Because the player is third-party and may refuse framing, `TourViewer` falls back to a
+"launch in a new tab" card if the iframe hasn't loaded within six seconds. `tests/tour.mjs`
+validates every deep link, including percent-encoding of the `Außen` scenes.
+
 ## Portfolio
 
 `/portfolio` is a reference showcase of productions that have run in the house (`src/data/portfolio.ts`),

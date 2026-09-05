@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { EDGES, FLOORS, NODES, SHAPES, VIEWBOX, nodeById, planRoute, routeSteps, type FloorId, type PinKind } from '../data/map';
 import { CONTACT } from '../data/venues';
 import { HALLS, TOTAL_SEATS, TOTAL_HALL_AREA } from '../data/halls';
+import TourViewer from '../components/TourViewer';
+import { sceneForNode } from '../data/tour';
 import { IconCar, IconElevator, IconExit, IconFood, IconInfo, IconPin, IconWc } from '../components/Icons';
 import { Sheet } from '../components/ui';
 
@@ -36,6 +38,7 @@ export default function Navigate() {
   const [to, setTo] = useState(target && nodeById(target) ? target : 'wagenhalle');
   const [accessible, setAccessible] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [tourScene, setTourScene] = useState<string | undefined>(undefined);
 
   const path = useMemo(() => planRoute(from, to), [from, to]);
   const steps = useMemo(() => routeSteps(path), [path]);
@@ -81,6 +84,14 @@ export default function Navigate() {
           </g>
         ))}
       </svg>
+
+      <div className="card card-pad section" id="tour">
+        <h2 style={{ marginBottom: 4 }}>360° virtual tour</h2>
+        <p className="small muted" style={{ marginBottom: 10 }}>
+          Walk through the building before you arrive — pick a space, drag to look around.
+        </p>
+        <TourViewer initial={tourScene} />
+      </div>
 
       <div className="card card-pad section">
         <h2 style={{ marginBottom: 10 }}>Get directions</h2>
@@ -161,6 +172,19 @@ export default function Navigate() {
             {sel.accessible && <span className="badge teal">Accessible</span>}
           </div>
           <p className="muted">{sel.info ?? 'No extra information for this point.'}</p>
+          {sceneForNode(sel.id) && (
+            <button
+              className="btn outline block"
+              style={{ marginTop: 12 }}
+              onClick={() => {
+                setTourScene(sceneForNode(sel.id)!.id);
+                setSelected(null);
+                document.getElementById('tour')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+            >
+              Look inside in 360°
+            </button>
+          )}
           <div className="row" style={{ marginTop: 14 }}>
             <button className="btn outline" style={{ flex: 1 }} onClick={() => { setFrom(sel.id); setSelected(null); }}>Route from here</button>
             <button className="btn primary" style={{ flex: 1 }} onClick={() => { setTo(sel.id); setSelected(null); }}>Directions here</button>

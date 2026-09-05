@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { sceneForNode, sceneUrl } from '../data/tour';
 import { CONTACT, venueById } from '../data/venues';
 import { EVENTS } from '../data/events';
 import { BackButton } from '../components/ui';
@@ -105,6 +106,11 @@ export default function VenueDetail() {
         <div className="stack section">
           <button className="btn primary block" onClick={() => nav(`/events?venue=${v.id}`)}>Check availability</button>
           <button className="btn outline block" onClick={() => nav(`/navigate?to=${v.id}`)}><IconPin size={16} /> Find it on the map</button>
+          {sceneForNode(v.id) && (
+            <a className="btn outline block" href={sceneUrl(sceneForNode(v.id)!)} target="_blank" rel="noreferrer">
+              View this space in 360°
+            </a>
+          )}
           <a className="btn teal block" href={`mailto:${CONTACT.email}?subject=Enquiry: ${v.name}`}><IconMail size={16} /> Get more info</a>
         </div>
       </div>
