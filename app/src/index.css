@@ -90,15 +90,18 @@ button { border: 0; background: none; cursor: pointer; }
    of the tubes shows, letting it sit on the header rather than on a panel. */
 .topbar-neon {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  height: 128%; width: auto; max-width: 50%;
+  height: 190%; width: auto; max-width: 56%;
+  object-fit: contain;
   pointer-events: none; user-select: none; z-index: 0;
-  mix-blend-mode: screen; opacity: 0.95;
-  -webkit-mask-image: radial-gradient(ellipse 68% 74% at 50% 50%, #000 58%, transparent 100%);
-          mask-image: radial-gradient(ellipse 68% 74% at 50% 50%, #000 58%, transparent 100%);
+  /* the artwork sits on black; screen drops the black and keeps only the
+     glow, so the sign blends into the bar instead of sitting on a panel */
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%);
 }
 .topbar > *:not(.topbar-neon) { position: relative; z-index: 1; }
-:root[data-theme='light'] .topbar-neon { mix-blend-mode: normal; opacity: 0.62; }
-@media (max-width: 560px) { .topbar-neon { max-width: 48%; height: 112%; opacity: 0.9; } }
+:root[data-theme='light'] .topbar-neon { mix-blend-mode: normal; opacity: 0.6; }
+@media (max-width: 560px) { .topbar-neon { max-width: 52%; height: 165%; } }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font); font-weight: 800; letter-spacing: 0.5px; }
 .brand .mark {
   width: 32px; height: 32px; border-radius: 8px; display: block;

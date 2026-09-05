@@ -23,16 +23,23 @@ const doc = window.document;
 
 // wordmark present, centred in the header, and not announced twice to screen readers
 const mark = doc.querySelector('.topbar .topbar-neon');
-if (!mark) bad('embossed wordmark not rendered in the topbar');
-else {
-  if (mark.getAttribute('aria-label') !== 'Colosseum') bad('wordmark missing accessible name');
-  if (mark.tagName.toLowerCase() !== 'svg') bad('wordmark should be inline svg');
-  // the script is baked to outlines: there must be no live <text> and so no webfont dependency
-  if (mark.querySelector('text')) bad('wordmark still uses live text (depends on a webfont)');
-  const paths = mark.querySelectorAll('path');
-  if (paths.length < 4) bad(`expected the outlined script paths, got ${paths.length}`);
-  if (!mark.querySelector('circle')) bad('red ring missing from the wordmark');
+const brandFile = path.join(root, 'public', 'img', 'brand', 'colosseum-logo.png');
+const haveArtwork = fs.existsSync(brandFile);
+if (haveArtwork) {
+  if (!mark) bad('logo artwork present but not rendered in the topbar');
+  else {
+    if (mark.tagName.toLowerCase() !== 'img') bad('logo should render as a plain <img> of the supplied file');
+    if (mark.getAttribute('src') !== '/img/brand/colosseum-logo.png') bad('logo points at the wrong file');
+    if (mark.getAttribute('alt') !== 'Colosseum') bad('logo missing accessible name');
+  }
+} else {
+  console.log('note: public/img/brand/colosseum-logo.png not present — header renders without it');
 }
+// the app must never recreate the logo in code again
+for (const f of ['NeonWordmark.tsx', 'BrandGlass.tsx']) {
+  if (fs.existsSync(path.join(root, 'src', 'components', f))) bad(`${f} still exists (logo should be the supplied file)`);
+}
+
 // it must sit behind the brand and cart, not intercept taps
 const css = fs.readFileSync(path.join(root, 'src', 'index.css'), 'utf8');
 if (!/\.topbar-neon[^}]*pointer-events:\s*none/.test(css)) bad('wordmark would intercept clicks');
