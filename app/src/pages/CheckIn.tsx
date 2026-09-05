@@ -43,7 +43,7 @@ function Bookings() {
     <>
       <div className="stack">
         {tickets.map((t) => {
-          const past = dayjs(t.date).isBefore(dayjs('2026-10-01'), 'day');
+          const past = dayjs(t.date).isBefore(dayjs('2026-09-05'), 'day');
           return (
             <button key={t.id} className="card card-pad between" style={{ width: '100%', textAlign: 'left' }} onClick={() => setOpenId(t.id)}>
               <div>

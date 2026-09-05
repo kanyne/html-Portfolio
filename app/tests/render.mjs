@@ -14,7 +14,7 @@ execSync(
 );
 const js = fs.readFileSync(bundlePath, 'utf8');
 
-const routes = ['/', '/events', '/events/dune-two', '/venues', '/venues/wagenhalle',
+const routes = ['/', '/events', '/events/irvine-welsh', '/venues', '/venues/wagenhalle',
   '/venues/kinosaele', '/cart', '/checkin', '/navigate', '/profile', '/nope'];
 
 let fails = 0;

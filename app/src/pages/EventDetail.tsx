@@ -63,7 +63,11 @@ export default function EventDetail() {
             {ev.featured && <span className="badge amber">Featured</span>}
           </div>
           <h1 style={{ color: '#fff' }}>{ev.title}</h1>
-          <div className="small" style={{ opacity: 0.9 }}>{dayjs(ev.date).format('dddd, D MMMM YYYY')} · {ev.time}–{ev.endTime}</div>
+          <div className="small" style={{ opacity: 0.9 }}>
+            {ev.endDate
+              ? `${dayjs(ev.date).format('D MMM')}, ${ev.time} – ${dayjs(ev.endDate).format('D MMM YYYY')}, ${ev.endTime}`
+              : `${dayjs(ev.date).format('dddd, D MMMM YYYY')} · ${ev.time}–${ev.endTime}`}
+          </div>
         </div>
       </div>
 
@@ -123,6 +127,7 @@ export default function EventDetail() {
               <div>
                 <b className="font-display">{venue.name}</b>
                 <div className="small muted">{venue.area} · capacity {venue.capacity} · {venue.floor}</div>
+                <div className="small muted">{ev.address}</div>
               </div>
               <span className="badge teal">Details</span>
             </button>
@@ -146,6 +151,16 @@ export default function EventDetail() {
             <h2 style={{ marginBottom: 8 }}>Related events</h2>
             <div className="stack">{related.map((e) => <EventCard key={e.id} ev={e} />)}</div>
           </section>
+        )}
+
+        {ev.ticketUrl && (
+          <p className="small muted" style={{ textAlign: 'center', marginBottom: 8 }}>
+            Also on sale at{' '}
+            <a href={ev.ticketUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--red)', fontWeight: 600 }}>
+              the official box office
+            </a>
+            .
+          </p>
         )}
 
         <div className="sticky-cta">

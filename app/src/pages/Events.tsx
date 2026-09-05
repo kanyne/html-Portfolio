@@ -10,21 +10,21 @@ export default function Events() {
   const [params, setParams] = useSearchParams();
   const [q, setQ] = useState('');
   const [type, setType] = useState<string>('All');
-  const [maxPrice, setMaxPrice] = useState(200);
+  const [maxPrice, setMaxPrice] = useState(120);
   const [when, setWhen] = useState<'all' | 'month' | 'week'>('all');
   const venueFilter = params.get('venue') ?? 'all';
 
   const featured = EVENTS.filter((e) => e.featured);
 
   const list = useMemo(() => {
-    const now = dayjs('2026-10-01');
+    const now = dayjs('2026-09-05');
     return EVENTS.filter((e) => {
       if (type !== 'All' && e.type !== type) return false;
       if (venueFilter !== 'all' && e.venueId !== venueFilter) return false;
       if (e.price > maxPrice) return false;
       if (q && !(`${e.title} ${e.venueLabel} ${e.type} ${e.short}`.toLowerCase().includes(q.toLowerCase()))) return false;
-      if (when === 'week' && dayjs(e.date).diff(now, 'day') > 21) return false;
-      if (when === 'month' && dayjs(e.date).diff(now, 'day') > 45) return false;
+      if (when === 'week' && dayjs(e.date).diff(now, 'day') > 14) return false;
+      if (when === 'month' && dayjs(e.date).diff(now, 'day') > 30) return false;
       return true;
     }).sort((a, b) => a.date.localeCompare(b.date));
   }, [q, type, maxPrice, when, venueFilter]);
@@ -34,7 +34,7 @@ export default function Events() {
   return (
     <div className="page">
       <h1 style={{ marginBottom: 4 }}>What's on</h1>
-      <p className="muted" style={{ marginBottom: 16 }}>Corporate events, cinema and everything in between at Colosseum Berlin.</p>
+      <p className="muted" style={{ marginBottom: 16 }}>Talks, readings, cinema, concerts and corporate events at Colosseum Berlin.</p>
 
       {!q && type === 'All' && venueFilter === 'all' && (
         <section className="section">
@@ -83,15 +83,15 @@ export default function Events() {
           <label htmlFor="f-date">Date</label>
           <select id="f-date" className="input" value={when} onChange={(e) => setWhen(e.target.value as 'all')}>
             <option value="all">Any date</option>
-            <option value="week">Next 3 weeks</option>
-            <option value="month">Next 6 weeks</option>
+            <option value="week">Next 2 weeks</option>
+            <option value="month">Next month</option>
           </select>
         </div>
       </div>
 
       <div className="field section">
-        <label htmlFor="f-price">Max price: {maxPrice >= 200 ? 'any' : `€${maxPrice}`}</label>
-        <input id="f-price" type="range" min={0} max={200} step={5} value={maxPrice} onChange={(e) => setMaxPrice(+e.target.value)} />
+        <label htmlFor="f-price">Max price: {maxPrice >= 120 ? 'any' : `€${maxPrice}`}</label>
+        <input id="f-price" type="range" min={0} max={120} step={5} value={maxPrice} onChange={(e) => setMaxPrice(+e.target.value)} />
       </div>
 
       <div className="section-head">

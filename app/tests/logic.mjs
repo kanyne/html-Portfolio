@@ -18,12 +18,12 @@ let fail = 0;
 const t = (name, cond, extra = '') => { console.log(`${cond ? 'OK  ' : 'FAIL'} ${name}${extra ? ' :: ' + extra : ''}`); if (!cond) fail++; };
 
 // fake event catalogue matching the shape checkout expects
-const evs = [{ id: 'dune-two', title: 'Dune: Part Two', venueLabel: 'Saal 1', date: '2026-10-10', time: '19:30' }];
+const evs = [{ id: 'irvine-welsh', title: 'Irvine Welsh live', venueLabel: 'Saal 1', date: '2026-09-27', time: '20:00' }];
 
-s().addToCart({ eventId: 'dune-two', tierId: 'standard', tierName: 'Standard', unitPrice: 12, qty: 2, seats: ['C5', 'C6'] });
+s().addToCart({ eventId: 'irvine-welsh', tierId: 'standard', tierName: 'Standard', unitPrice: 12, qty: 2, seats: ['C5', 'C6'] });
 t('cart has 1 line, qty 2', s().cart.length === 1 && s().cart[0].qty === 2);
 
-s().addToCart({ eventId: 'dune-two', tierId: 'premium', tierName: 'Premium row', unitPrice: 15, qty: 1 });
+s().addToCart({ eventId: 'irvine-welsh', tierId: 'premium', tierName: 'Premium row', unitPrice: 15, qty: 1 });
 t('second tier is a separate line', s().cart.length === 2);
 
 let tot = s().totals();
@@ -55,8 +55,8 @@ t('re-scan flagged reused', s().scan(tk.code).result === 'reused');
 t('scan by plain ticket ID works', s().scan(s().tickets[1].id).result === 'ok');
 t('scan log has 4 entries', s().scanLog.length === 4, String(s().scanLog.length));
 
-s().toggleWish('spectaris'); s().toggleWish('dune-two'); s().toggleWish('spectaris');
-t('wishlist toggles', JSON.stringify(s().wishlist) === '["dune-two"]', JSON.stringify(s().wishlist));
+s().toggleWish('gysi-kaeser'); s().toggleWish('irvine-welsh'); s().toggleWish('gysi-kaeser');
+t('wishlist toggles', JSON.stringify(s().wishlist) === '["irvine-welsh"]', JSON.stringify(s().wishlist));
 
 s().setPrefs({ darkMode: false });
 t('prefs merge, others intact', s().prefs.darkMode === false && s().prefs.emailNewEvents === true);

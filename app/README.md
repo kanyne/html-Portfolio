@@ -40,7 +40,7 @@ Dark mode is default; a light theme ships via `data-theme="light"` (Profile → 
 
 ## Features (MVP)
 
-1. **Events** — feed, featured carousel, search, filters (type, venue, date window, max price), detail view with description, rules, speakers, capacity bar, related events, share, wishlist.
+1. **Events** — feed, featured carousel, search, filters (type, venue, date window, max price), detail view with description, rules, speakers, capacity bar, related events, share, wishlist. The 18 events are the **real September–October 2026 programme** sampled from [colosseumberlin.com/event](https://www.colosseumberlin.com/event) — Gysis Begegnungen, Irvine Welsh, Cornelia Funke, Christoph Kramer, ÜBERDOSIS CRIME, babywho CONNECT and more — each linking out to its official box-office page.
 2. **Venues** — grid/list toggle for Wagenhalle, Galerie, Kinosäle (halls 2–10 table) and Saal 1; specs, photo gallery, layout diagram, formats, amenities, accessibility, gastronomy, combinability, "Check availability" → filtered calendar.
 3. **Booking** — tier picker, quantity 1–10, numbered seat selection for cinema events, cart with promo codes (`COLOSSEUM10`, `BERLIN25`, `STAFF`), 4.5% service fee, guest details + demo Stripe-style payment, confirmation with a unique QR per ticket.
 4. **Check-in** — *My bookings* (status, QR sheet, resend) and *Staff dashboard* (PIN `1895`): scan/enter code, valid / already-used / not-found states, attendance & capacity stats, live scan log.
