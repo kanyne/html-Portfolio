@@ -33,10 +33,20 @@ export default function App() {
           <img className="mark" src="/icon.svg" alt="" width={32} height={32} />
           <span>COLOSSEUM<small>BERLIN · EVENTS</small></span>
         </a>
-        <button className="icon-btn" onClick={() => nav('/cart')} aria-label={`Cart, ${cartCount} items`}>
-          <IconCart size={20} />
-          {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-        </button>
+        <div className="topbar-actions">
+          <button className="icon-btn" onClick={() => nav('/cart')} aria-label={`Cart, ${cartCount} items`}>
+            <IconCart size={20} />
+            {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+          </button>
+          <button
+            className={`icon-btn ${loc.pathname === '/profile' ? 'active' : ''}`}
+            onClick={() => nav('/profile')}
+            aria-label="Profile"
+            aria-current={loc.pathname === '/profile' ? 'page' : undefined}
+          >
+            <IconUser size={20} />
+          </button>
+        </div>
       </header>
 
       <main>
@@ -63,7 +73,6 @@ export default function App() {
         <NavLink to="/checkin"><IconCheck /> Check-In</NavLink>
         <NavLink to="/portfolio"><IconStar /> Portfolio</NavLink>
         <NavLink to="/navigate"><IconMap /> Navigate</NavLink>
-        <NavLink to="/profile"><IconUser /> Profile</NavLink>
       </nav>
     </div>
   );

@@ -40,6 +40,20 @@ for (const f of ['NeonWordmark.tsx', 'BrandGlass.tsx']) {
   if (fs.existsSync(path.join(root, 'src', 'components', f))) bad(`${f} still exists (logo should be the supplied file)`);
 }
 
+// Profile lives in the topbar next to the cart, not in the bottom nav
+const actions = doc.querySelector('.topbar .topbar-actions');
+if (!actions) bad('topbar actions group missing');
+else {
+  const btns = [...actions.querySelectorAll('button')].map(b => b.getAttribute('aria-label') || '');
+  if (!btns.some(l => l.startsWith('Cart'))) bad('cart button not in the topbar actions');
+  if (!btns.includes('Profile')) bad('profile button not next to the cart in the topbar');
+  if (btns.length !== 2) bad(`expected cart + profile in the topbar, got ${btns.length}`);
+}
+const bottomHrefs = [...doc.querySelectorAll('nav.bottomnav a')].map(a => a.getAttribute('href'));
+if (bottomHrefs.includes('/profile')) bad('profile is still in the bottom nav');
+if (bottomHrefs.length !== 5) bad(`bottom nav should have 5 tabs, got ${bottomHrefs.length}`);
+console.log('topbar: cart + profile | bottom nav:', bottomHrefs.join(' '));
+
 // it must sit behind the brand and cart, not intercept taps
 const css = fs.readFileSync(path.join(root, 'src', 'index.css'), 'utf8');
 if (!/\.topbar-neon[^}]*pointer-events:\s*none/.test(css)) bad('wordmark would intercept clicks');

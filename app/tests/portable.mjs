@@ -44,7 +44,7 @@ await new Promise(r => setTimeout(r, 250));
 const root = window.document.getElementById('root');
 const text = root?.textContent ?? '';
 if (text.length < 100) bad(`app did not render (${text.length} chars)`);
-if (window.document.querySelectorAll('nav a').length !== 6) bad('nav did not render');
+if (window.document.querySelectorAll('nav a').length !== 5) bad('nav did not render');
 console.log(`file:// boot OK — ${text.length} chars rendered`);
 
 // hash routing must be in use, otherwise deep links break off a filesystem

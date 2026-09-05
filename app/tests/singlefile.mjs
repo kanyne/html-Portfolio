@@ -41,7 +41,7 @@ if (text.length < 200) bad(`app did not render from a lone file (${text.length} 
 else console.log(`rendered ${text.length} chars from an isolated file://`);
 
 const nav = doc.querySelectorAll('nav a');
-if (nav.length !== 6) bad(`expected 6 nav links, got ${nav.length}`);
+if (nav.length !== 5) bad(`expected 5 nav links, got ${nav.length}`);
 if (![...nav].every(a => (a.getAttribute('href') || '').startsWith('#/'))) bad('nav is not hash-based');
 
 // 3. images must all be data URIs, none pointing at the filesystem
