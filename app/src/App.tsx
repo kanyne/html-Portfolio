@@ -28,7 +28,7 @@ export default function App() {
     <div className="shell">
       <header className="topbar">
         <a className="brand" href="/" onClick={(e) => { e.preventDefault(); nav('/'); }}>
-          <span className="mark">C</span>
+          <img className="mark" src="/icon.svg" alt="" width={32} height={32} />
           <span>COLOSSEUM<small>BERLIN · EVENTS</small></span>
         </a>
         <button className="icon-btn" onClick={() => nav('/cart')} aria-label={`Cart, ${cartCount} items`}>

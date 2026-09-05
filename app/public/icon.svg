@@ -1,5 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" rx="112" fill="#1A1A1A"/>
-  <rect x="40" y="40" width="432" height="432" rx="88" fill="none" stroke="#E31C1C" stroke-width="16"/>
-  <text x="256" y="352" text-anchor="middle" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="280" font-weight="800" fill="#E31C1C">C</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Colosseum Berlin">
+  <defs>
+    <!-- brushed dark plate -->
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A2E33"/>
+      <stop offset="0.55" stop-color="#1C1F23"/>
+      <stop offset="1" stop-color="#14171A"/>
+    </linearGradient>
+    <!-- warm spill from the red tube onto the plate -->
+    <radialGradient id="spill" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.55" stop-color="#E31C1C" stop-opacity="0"/>
+      <stop offset="0.85" stop-color="#E31C1C" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#E31C1C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glowRed" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowCyan" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="12" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#plate)"/>
+  <rect width="512" height="512" rx="112" fill="url(#spill)"/>
+  <rect x="3" y="3" width="506" height="506" rx="110" fill="none" stroke="#3A4048" stroke-width="6" stroke-opacity="0.7"/>
+
+  <!-- red neon ring, with a gap at the top right like a bent glass tube -->
+  <g filter="url(#glowRed)" fill="none" stroke-linecap="round">
+    <circle cx="256" cy="256" r="176" stroke="#7E0D0D" stroke-width="26" stroke-opacity="0.55"/>
+    <path d="M 256 80 A 176 176 0 1 0 404 342" stroke="#E31C1C" stroke-width="20"/>
+    <path d="M 256 80 A 176 176 0 1 0 404 342" stroke="#FF6B6B" stroke-width="8"/>
+    <path d="M 256 80 A 176 176 0 0 1 396 150" stroke="#E31C1C" stroke-width="20"/>
+    <path d="M 256 80 A 176 176 0 0 1 396 150" stroke="#FF6B6B" stroke-width="8"/>
+  </g>
+
+  <!-- cyan cursive C -->
+  <g filter="url(#glowCyan)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 330 168 C 268 128 176 168 164 244 C 152 320 224 372 300 350"
+          stroke="#0E7C8C" stroke-width="30" stroke-opacity="0.5"/>
+    <path d="M 330 168 C 268 128 176 168 164 244 C 152 320 224 372 300 350"
+          stroke="#39E0F0" stroke-width="20"/>
+    <path d="M 330 168 C 268 128 176 168 164 244 C 152 320 224 372 300 350"
+          stroke="#CFFAFF" stroke-width="7"/>
+    <!-- flourish tail: a looped curl that crosses back over itself -->
+    <path d="M 296 352 C 342 348 358 300 334 286 C 312 273 296 306 318 328 C 344 354 388 342 404 306"
+          stroke="#0E7C8C" stroke-width="26" stroke-opacity="0.45"/>
+    <path d="M 296 352 C 342 348 358 300 334 286 C 312 273 296 306 318 328 C 344 354 388 342 404 306"
+          stroke="#39E0F0" stroke-width="18"/>
+    <path d="M 296 352 C 342 348 358 300 334 286 C 312 273 296 306 318 328 C 344 354 388 342 404 306"
+          stroke="#CFFAFF" stroke-width="6.5"/>
+  </g>
 </svg>

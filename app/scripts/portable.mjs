@@ -22,14 +22,18 @@ for (const f of fs.readdirSync(assetDir)) {
   if (!/\.(js|css)$/.test(f)) continue;
   const p = path.join(assetDir, f);
   const before = fs.readFileSync(p, 'utf8');
-  // assets/ sits one level below index.html, so step up before entering img/
-  // paths appear in double quotes, single quotes and template literals
-  const after = before
-    .replaceAll('"/img/', '"../img/')
-    .replaceAll("'/img/", "'../img/")
-    .replaceAll('`/img/', '`../img/');
+  // assets/ sits one level below index.html, so step up before entering the
+  // public-asset paths. These appear in double quotes, single quotes and
+  // template literals, and cover img/ plus the two app icons.
+  let after = before;
+  for (const q of ['"', "'", '`']) {
+    after = after
+      .replaceAll(`${q}/img/`, `${q}../img/`)
+      .replaceAll(`${q}/icon.svg`, `${q}../icon.svg`)
+      .replaceAll(`${q}/icon-maskable.svg`, `${q}../icon-maskable.svg`);
+  }
   if (after !== before) {
-    patched += (before.match(/["'`]\/img\//g) || []).length;
+    patched += (before.match(/["'`]\/(img\/|icon(-maskable)?\.svg)/g) || []).length;
     files++;
     fs.writeFileSync(p, after);
   }
@@ -38,13 +42,14 @@ for (const f of fs.readdirSync(assetDir)) {
 const idx = path.join(dir, 'index.html');
 let html = fs.readFileSync(idx, 'utf8');
 html = html.replace(/<script>[\s\S]*?serviceWorker[\s\S]*?<\/script>/g, '');
-html = html.replaceAll('"/img/', '"./img/');
+html = html.replaceAll('"/img/', '"./img/').replaceAll('"/icon', '"./icon');
 fs.writeFileSync(idx, html);
 
 const leftover = fs
   .readdirSync(assetDir)
   .filter((f) => /\.(js|css)$/.test(f))
-  .flatMap((f) => fs.readFileSync(path.join(assetDir, f), 'utf8').match(/["'`]\/img\//g) || []);
+  .flatMap((f) => fs.readFileSync(path.join(assetDir, f), 'utf8')
+    .match(/["'`]\/(img\/|icon(-maskable)?\.svg)/g) || []);
 
 console.log(
   `portable: rewrote ${patched} image paths across ${files} file(s); ${leftover.length} absolute refs left`,

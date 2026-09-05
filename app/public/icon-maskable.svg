@@ -1,4 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" fill="#E31C1C"/>
-  <text x="256" y="345" text-anchor="middle" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="240" font-weight="800" fill="#FFFFFF">C</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Colosseum Berlin">
+  <defs>
+    <radialGradient id="mspill" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0.4" stop-color="#E31C1C" stop-opacity="0"/>
+      <stop offset="0.8" stop-color="#E31C1C" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#E31C1C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mGlowRed" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="mGlowCyan" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- full bleed: maskable icons get cropped to a circle on some launchers,
+       so the artwork is scaled into the safe zone (inner 80%) -->
+  <rect width="512" height="512" fill="#1A1D21"/>
+  <rect width="512" height="512" fill="url(#mspill)"/>
+
+  <g transform="translate(256 256) scale(0.78) translate(-256 -256)">
+    <g filter="url(#mGlowRed)" fill="none" stroke-linecap="round">
+      <path d="M 256 80 A 176 176 0 1 0 404 342" stroke="#E31C1C" stroke-width="20"/>
+      <path d="M 256 80 A 176 176 0 1 0 404 342" stroke="#FF6B6B" stroke-width="8"/>
+      <path d="M 256 80 A 176 176 0 0 1 396 150" stroke="#E31C1C" stroke-width="20"/>
+      <path d="M 256 80 A 176 176 0 0 1 396 150" stroke="#FF6B6B" stroke-width="8"/>
+    </g>
+    <g filter="url(#mGlowCyan)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 330 168 C 268 128 176 168 164 244 C 152 320 224 372 300 350" stroke="#39E0F0" stroke-width="20"/>
+      <path d="M 330 168 C 268 128 176 168 164 244 C 152 320 224 372 300 350" stroke="#CFFAFF" stroke-width="7"/>
+      <path d="M 296 352 C 342 348 358 300 334 286 C 312 273 296 306 318 328 C 344 354 388 342 404 306" stroke="#39E0F0" stroke-width="18"/>
+      <path d="M 296 352 C 342 348 358 300 334 286 C 312 273 296 306 318 328 C 344 354 388 342 404 306" stroke="#CFFAFF" stroke-width="6.5"/>
+    </g>
+  </g>
 </svg>

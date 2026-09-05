@@ -27,6 +27,7 @@ function root_cache() {
   const d = path.resolve('node_modules/.cache'); fs.mkdirSync(d, { recursive: true }); return d;
 }
 if (/["'`]\/img\//.test(js)) bad('bundle still references root-absolute /img/');
+if (/["'`]\/icon(-maskable)?\.svg/.test(js)) bad('bundle still references root-absolute /icon.svg');
 if (!/\.\.\/img\//.test(js)) bad('bundle has no relative image paths');
 
 // boot it from an actual file:// document URL
