@@ -74,6 +74,20 @@ and checks each hall has a map pin reachable from the street.
 The cinema level draws all nine kino halls individually, sized roughly in proportion to their real
 floor area, arranged around the central Kinosäle foyer that every hall opens off.
 
+## Single-file export
+
+    npm run build:singlefile
+
+Writes `colosseum-preview.html` in the repo root — **one file, ~3.4 MB, nothing else needed**.
+Every photo, icon, stylesheet and script is inlined as a base64 data URI, so it can be emailed as
+an attachment or opened straight off the desktop. `tests/singlefile.mjs` copies it alone into an
+empty temp directory and boots it from a real `file://` URL to prove it has no outside dependencies.
+
+Two things make it work off `file://`: the ES-module chunk Vite emits is re-bundled to a classic
+IIFE (Chrome refuses `<script type="module">` on `file://`), and the script is injected with a
+function replacer — a plain string replacement would treat `$&` and `$'` inside the minified
+bundle as replacement patterns and silently corrupt the code.
+
 ## Portable preview
 
     npm run build:portable
