@@ -5,7 +5,7 @@ import { execSync } from 'node:child_process';
 
 const root = process.cwd();
 const bundle = path.join(root, 'node_modules', '.cache', 'fb-bundle.js');
-execSync(`npx esbuild src/main.tsx --bundle --format=iife --jsx=automatic --define:process.env.NODE_ENV='"production"' --outfile=${bundle} --log-level=error`, { cwd: root });
+execSync(`npx esbuild src/main.tsx --bundle --format=iife --jsx=automatic --define:process.env.NODE_ENV='"production"' --define:import.meta.env='{"VITE_PORTABLE":""}' --outfile=${bundle} --log-level=error`, { cwd: root });
 const js = fs.readFileSync(bundle, 'utf8');
 const html = fs.readFileSync(path.join(root, 'dist', 'index.html'), 'utf8').replace(/<script[^>]*><\/script>/g, '');
 

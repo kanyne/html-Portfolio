@@ -9,7 +9,7 @@ const html = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 const bundlePath = path.join(dist, '..', 'node_modules', '.cache', 'test-bundle.js');
 fs.mkdirSync(path.dirname(bundlePath), { recursive: true });
 execSync(
-  `npx esbuild src/main.tsx --bundle --format=iife --jsx=automatic --define:process.env.NODE_ENV='"production"' --outfile=${bundlePath} --log-level=error`,
+  `npx esbuild src/main.tsx --bundle --format=iife --jsx=automatic --define:process.env.NODE_ENV='"production"' --define:import.meta.env='{"VITE_PORTABLE":""}' --outfile=${bundlePath} --log-level=error`,
   { cwd: path.join(dist, '..'), stdio: 'inherit' },
 );
 const js = fs.readFileSync(bundlePath, 'utf8');

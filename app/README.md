@@ -74,6 +74,20 @@ and checks each hall has a map pin reachable from the street.
 The cinema level draws all nine kino halls individually, sized roughly in proportion to their real
 floor area, arranged around the central Kinosäle foyer that every hall opens off.
 
+## Portable preview
+
+    npm run build:portable
+
+Produces `dist-portable/` — **double-click `index.html` and it runs**, no server, no install.
+Two differences from the hosted build make that possible: `base: './'` for relative asset URLs,
+and a `HashRouter` instead of `BrowserRouter` (history routing cannot work over `file://`).
+`scripts/portable.mjs` then rewrites the root-absolute `/img/` paths to be document-relative and
+strips the service-worker registration. Ship the folder, or zip it — `colosseum-portable-preview.zip`
+in the repo root is exactly that, ~1.9 MB.
+
+`tests/portable.mjs` boots the built output through a genuine `file://` document URL and asserts
+it renders, that the nav is hash-based and that hash navigation and every bundled image resolve.
+
 ## 360° virtual tour
 
 The Navigate tab embeds the venue's official nexpics/mediaglobe panorama tour
