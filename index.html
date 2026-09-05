@@ -1,47 +1,72 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Good Stuff</title>
-  </head>
-  <body>
-    <h1>Kanyne Portfolio</h1>
-    <h2>I am a Web Developer</h2>
-    <hr />
-    <a href="./assets/images/movie-ranking.png"
-      ><h3>Movie-Ranking Project</h3></a
-    >
-    <h3>The Best Movies According to Kanyne</h3>
-    <h4>My Top 3 Movies of all Time</h4>
-    <hr />
-    <h4>Spririted Away</h4>
-    This is my Favourite anime.Love it
-    <h4>Ex Machina</h4>
-    Very cool Sci-fi Flick
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0908" />
+  <meta name="description" content="Colosseum Berlin — event calendar, tickets with QR check-in, venue navigation and notifications." />
+  <title>Colosseum Berlin · Guest App</title>
 
-    <a href="./assets/images/birthday-invite.png"
-      ><h2>Birthday Invite Project</h2></a
-    >
-    <h3>Its My birthday!!</h3>
-    <h4>On the 31st of August</h4>
-    <img src="./assets/images/birthday-invite.png" />
-    <a href="./public/about.html"><h3>About Me</h3></a>
-    <a href="./public/contact.html"><h3>Contact Me</h3></a>
-  </body>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg" />
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div id="boot" class="hidden"></div>
+
+  <div id="app" class="hidden">
+    <header class="topbar">
+      <a class="brand" href="#/home">
+        <span class="mark">C</span>
+        <span class="name">COLOSSEUM<small>BERLIN · EVENTLOCATION</small></span>
+      </a>
+      <div class="actions">
+        <button class="icon-btn" data-bell aria-label="Notifications" data-go="notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg>
+          <span class="badge-dot" style="display:none"></span>
+        </button>
+        <button class="icon-btn" aria-label="Menu" data-go="more">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.2-3.5 3.9-5.5 7-5.5s5.8 2 7 5.5"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="root"></main>
+  </div>
+
+  <nav class="bottomnav" aria-label="Main">
+    <a href="#/home" data-nav="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+      Home
+    </a>
+    <a href="#/events" data-nav="events">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      Events
+    </a>
+    <a href="#/spaces" data-nav="spaces">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>
+      Venue
+    </a>
+    <a href="#/tickets" data-nav="tickets">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8z"/><path d="M13 6v2m0 4v2m0 4v2" stroke-dasharray="1.5 3"/></svg>
+      Tickets
+    </a>
+    <a href="#/checkin" data-nav="checkin">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 8V5a1 1 0 0 1 1-1h3m8 0h3a1 1 0 0 1 1 1v3m0 8v3a1 1 0 0 1-1 1h-3m-8 0H5a1 1 0 0 1-1-1v-3"/><path d="M7 12h10"/></svg>
+      Check-in
+    </a>
+  </nav>
+
+  <div id="toast" role="status"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5m0 3v.5"/></svg></span><span></span></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/qrcode.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
 </html>
-
-<!-- TODO 2: Add Your previous projects' HTML into the public folder -->
-
-<!-- TODO 3: Take screenshots of your project previews and add the images to the images folder -->
-
-<!-- TODO 4: Add titles/subtitles etc. -->
-
-<!-- TODO 5: Add a link to the project pages -->
-
-<!-- TODO 6: Add images to show the project previews
-HINT for TODO 6: You can use the height attribute set to 200 to make the image smaller:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height -->
-
-<!-- TODO 7: Add the Contact Me and About Me page links -->

@@ -15,7 +15,7 @@ execSync(
 const js = fs.readFileSync(bundlePath, 'utf8');
 
 const routes = ['/', '/events', '/events/irvine-welsh', '/venues', '/venues/wagenhalle',
-  '/venues/kinosaele', '/cart', '/checkin', '/navigate', '/profile', '/nope'];
+  '/venues/kinosaele', '/cart', '/checkin', '/navigate', '/portfolio', '/profile', '/nope'];
 
 let fails = 0;
 for (const route of routes) {
@@ -31,7 +31,7 @@ for (const route of routes) {
     const root = window.document.getElementById('root');
     const text = (root.textContent || '').trim();
     const nav = root.querySelectorAll('nav a').length;
-    const ok = text.length > 40 && nav === 5;
+    const ok = text.length > 40 && nav === 6;
     if (!ok) fails++;
     console.log(`${ok ? 'OK  ' : 'FAIL'} ${route.padEnd(22)} chars=${String(text.length).padStart(5)} navlinks=${nav} :: ${text.slice(0, 55).replace(/\s+/g, ' ')}`);
   } catch (e) {

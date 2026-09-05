@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { EDGES, FLOORS, NODES, SHAPES, VIEWBOX, nodeById, planRoute, routeSteps, type FloorId, type PinKind } from '../data/map';
 import { CONTACT } from '../data/venues';
+import { HALLS, TOTAL_SEATS, TOTAL_HALL_AREA } from '../data/halls';
 import { IconCar, IconElevator, IconExit, IconFood, IconInfo, IconPin, IconWc } from '../components/Icons';
 import { Sheet } from '../components/ui';
 
@@ -106,6 +107,29 @@ export default function Navigate() {
       </div>
 
       <div className="card card-pad section">
+        <h2 style={{ marginBottom: 4 }}>Halls &amp; capacities</h2>
+        <p className="small muted" style={{ marginBottom: 10 }}>
+          Ten halls, {TOTAL_SEATS.toLocaleString('de-DE')} seats, {TOTAL_HALL_AREA.toLocaleString('de-DE')} m² of auditorium.
+          Tap a hall to route there.
+        </p>
+        <table className="hall-table">
+          <thead>
+            <tr><th>Hall</th><th>Area</th><th>Seats</th><th aria-label="Relative size" /></tr>
+          </thead>
+          <tbody>
+            {HALLS.map((h) => (
+              <tr key={h.id} onClick={() => { const n = nodeById(h.id); if (n) { setFloor(n.floor); setTo(h.id); } }} tabIndex={0} role="button">
+                <td><b>{h.name}</b></td>
+                <td className="muted">{h.area} m²</td>
+                <td>{h.seats}</td>
+                <td><span className="bar" style={{ width: `${(h.seats / 454) * 100}%` }} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="card card-pad section">
         <h2 style={{ marginBottom: 10 }}>Legend</h2>
         <div className="row" style={{ flexWrap: 'wrap', gap: 8 }}>
           {(Object.keys(KIND_COLOR) as PinKind[]).map((k) => (
@@ -115,10 +139,10 @@ export default function Navigate() {
       </div>
 
       <div className="stack section">
-        <InfoCard title="Parking" body="120 spaces in the garage on Auguststraße, 4 accessible bays, 3 minutes to the main entrance. €3/h, €18 day rate." icon={<IconCar />} />
-        <InfoCard title="Restrooms" body="Ground floor next to the Garderobe, Galerie level by the east terrace, cinema level next to concessions. All have accessible cabins." icon={<IconWc />} />
+        <InfoCard title="Parking" body="Underground garage beneath the house, entrance on Schönhauser Allee. 4 accessible bays, 3 minutes to the main entrance. €3/h, €18 day rate." icon={<IconCar />} />
+        <InfoCard title="Restrooms" body="Ground floor next to the Garderobe, Galerie level by the east terrace, and WC Damen / WC Herren either side of the kino foyer. All have accessible cabins." icon={<IconWc />} />
         <InfoCard title="Gastronomy" body="Atrium bar (ground), terrace bar (Galerie) and cinema concessions. Card payment only." icon={<IconFood />} />
-        <InfoCard title="Emergency" body="Follow the green signage to the nearest exit; assembly point is the courtyard on Auguststraße. Staff in red lanyards are trained marshals." icon={<IconExit />} />
+        <InfoCard title="Emergency" body="Follow the green signage to the nearest exit; assembly point is the forecourt on Schönhauser Allee. Staff in red lanyards are trained marshals." icon={<IconExit />} />
         <InfoCard title="Wi-Fi & accessibility" body="Free Wi-Fi: COLOSSEUM-GUEST (no password). Step-free access throughout, elevator to all levels, induction loops in all cinema halls." icon={<IconInfo />} />
       </div>
 

@@ -96,9 +96,9 @@ export const VENUES: Venue[] = [
   {
     id: 'kinosaele',
     name: 'Kinosäle',
-    tagline: '9 halls · 122–454 seats',
-    area: '4,000 m²',
-    capacity: 2075,
+    tagline: '9 halls · 122–454 seats · 2,152 seats total',
+    area: '2,440 m²',
+    capacity: 2152,
     floor: 'Stage 1',
     color: '#2D5F6F',
     description:
@@ -106,7 +106,7 @@ export const VENUES: Venue[] = [
     images: [IMG.kino, IMG.kinoFoyer, IMG.saal1Stage, IMG.foyer, IMG.galerie2],
     specs: [
       { label: 'Halls', value: '9 (Hall 2–10)' },
-      { label: 'Total area', value: '≈ 4,000 m²' },
+      { label: 'Total area', value: '2,440 m² across nine halls' },
       { label: 'Seats', value: '122 – 454 per hall' },
       { label: 'Options', value: 'Dressed / undressed' },
     ],
@@ -147,8 +147,8 @@ export const venueById = (id: string) => VENUES.find((v) => v.id === id);
 export const CONTACT = {
   email: 'db@colosseumberlin.com',
   phone: '+49 30 921095624',
-  address: 'Auguststraße 20, 10117 Berlin',
+  address: 'Schönhauser Allee 123, 10437 Berlin',
   website: 'https://colosseumberlin.com',
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Augustra%C3%9Fe+20%2C+10117+Berlin',
-  transit: 'U8 Weinmeisterstraße (5 min) · S-Bhf Oranienburger Straße (7 min) · Tram M1 Weinmeisterstraße',
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sch%C3%B6nhauser+Allee+123%2C+10437+Berlin',
+  transit: 'U2 Eberswalder Straße (2 min) · S+U Schönhauser Allee (8 min) · Tram M1, M10, 12 Eberswalder Straße',
 };

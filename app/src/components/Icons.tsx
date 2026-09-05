@@ -38,3 +38,9 @@ export const IconPhone = ({ size }: P) => (<svg {...base(size)}><path d="M6 3h3l
 export const IconCam = ({ size }: P) => (<svg {...base(size)}><rect x="3" y="7" width="18" height="13" rx="3" /><circle cx="12" cy="13.5" r="3.4" /><path d="M9 7l1.5-3h3L15 7" /></svg>);
 export const IconGrid = ({ size }: P) => (<svg {...base(size)}><rect x="4" y="4" width="7" height="7" rx="2" /><rect x="13" y="4" width="7" height="7" rx="2" /><rect x="4" y="13" width="7" height="7" rx="2" /><rect x="13" y="13" width="7" height="7" rx="2" /></svg>);
 export const IconList = ({ size }: P) => (<svg {...base(size)}><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" /></svg>);
+
+export const IconStar = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6.1L12 16.8 6.6 19.7l1.2-6.1L3.3 9.4l6.1-.8z" />
+  </svg>
+);

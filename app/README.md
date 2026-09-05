@@ -63,6 +63,23 @@ Bundle: ~105 KB gzipped JS + ~3 KB gzipped CSS (budget was 500 KB).
 - `tests/render.mjs` — bundles the app and mounts all 11 routes in jsdom, asserting each paints content and the 5-tab nav.
 - `tests/logic.mjs` — 32 assertions over the cart maths, promo codes, service fee, checkout, QR ticket issuance, scan states (valid / reused / invalid), scan log, wishlist, preferences, persistence, demo reset, and the wayfinding graph (elevator routing, reachability, step narration).
 
+## Halls & floor plan
+
+`src/data/halls.ts` holds the ten halls with the areas and seat counts published on
+colosseumberlin.com — Saal 1 (535 m² / 525) plus Kinosäle 2–10, **2,677 seats over 2,975 m²** in
+total, matching the "2,600 seats" the venue advertises. These numbers drive the Navigate floor
+plan, the capacity table and the portfolio stats; `tests/halls.mjs` asserts every published figure
+and checks each hall has a map pin reachable from the street.
+
+The cinema level draws all nine kino halls individually, sized roughly in proportion to their real
+floor area, arranged around the central Kinosäle foyer that every hall opens off.
+
+## Portfolio
+
+`/portfolio` is a reference showcase of productions that have run in the house (`src/data/portfolio.ts`),
+filterable by format, each with the spaces used, realised guest numbers, layout and production notes.
+Photos live in `public/img/portfolio/`.
+
 ## Imagery
 
 **Event artwork** is the official poster/thumbnail for each listing, loaded straight from the

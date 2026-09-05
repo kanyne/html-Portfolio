@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="page">
       <div style={{ marginBottom: 16 }}>
-        <div className="small muted" style={{ letterSpacing: 2, fontWeight: 600 }}>AUGUSTSTRASSE 20 · BERLIN MITTE</div>
+        <div className="small muted" style={{ letterSpacing: 2, fontWeight: 600 }}>SCHÖNHAUSER ALLEE 123 · PRENZLAUER BERG</div>
         <h1>{user ? `Hi ${user.name.split(' ')[0]},` : 'Welcome to Colosseum'}</h1>
         <p className="muted">10,000 m² of event space, 4 venues and 10 cinema halls — book, check in and find your way.</p>
       </div>

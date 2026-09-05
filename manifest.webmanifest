@@ -1,0 +1,19 @@
+{
+  "name": "Colosseum Berlin — Guest App",
+  "short_name": "Colosseum",
+  "description": "Events, tickets with QR check-in, venue navigation and notifications for the Colosseum Berlin.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0908",
+  "theme_color": "#0b0908",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

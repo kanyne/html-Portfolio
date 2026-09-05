@@ -288,3 +288,34 @@ button { border: 0; background: none; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* --- hall capacity table (Navigate) --- */
+.hall-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.hall-table th { text-align: left; font-weight: 600; font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); padding: 0 8px 6px 0; }
+.hall-table td { padding: 7px 8px 7px 0; border-top: 1px solid var(--line); vertical-align: middle; }
+.hall-table tbody tr { cursor: pointer; }
+.hall-table tbody tr:hover td, .hall-table tbody tr:focus-visible td { background: rgba(255,255,255,0.04); }
+.hall-table td:last-child { width: 34%; }
+.hall-table .bar { display: block; height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--red), #f5a623); min-width: 4px; }
+
+/* --- portfolio --- */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+  padding: 10px 8px; text-align: center; }
+.stat b { display: block; font-family: var(--display); font-size: 18px; line-height: 1.1; }
+.stat span { font-size: 11px; color: var(--muted); }
+
+.pf-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px) { .pf-grid { grid-template-columns: 1fr 1fr; } }
+.pf-card { display: flex; flex-direction: column; text-align: left; padding: 0; overflow: hidden; }
+.pf-media { width: 100%; height: 170px; object-fit: cover; display: block; }
+.pf-card .body { padding: 12px; display: grid; gap: 6px; }
+.pf-card .title { font-family: var(--display); font-size: 16px; line-height: 1.25; }
+.pf-card .meta { display: flex; justify-content: space-between; gap: 10px;
+  font-size: 12px; color: var(--muted); }
+.pf-hero { width: 100%; height: 200px; object-fit: cover; border-radius: var(--r); display: block; }
+.kv { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.kv > div { display: grid; gap: 2px; }
+.kv b { font-size: 14px; }

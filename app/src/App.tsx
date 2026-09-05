@@ -11,8 +11,9 @@ import Confirmation from './pages/Confirmation';
 import CheckIn from './pages/CheckIn';
 import NavigatePage from './pages/Navigate';
 import Profile from './pages/Profile';
+import Portfolio from './pages/Portfolio';
 import { useStore } from './store';
-import { IconCart, IconCheck, IconHome, IconMap, IconPin, IconUser } from './components/Icons';
+import { IconCart, IconCheck, IconHome, IconMap, IconPin, IconStar, IconUser } from './components/Icons';
 
 export default function App() {
   const loc = useLocation();
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/confirmation/:orderId" element={<Confirmation />} />
           <Route path="/checkin" element={<CheckIn />} />
           <Route path="/navigate" element={<NavigatePage />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -57,6 +59,7 @@ export default function App() {
         <NavLink to="/" end><IconHome /> Events</NavLink>
         <NavLink to="/venues"><IconPin /> Venues</NavLink>
         <NavLink to="/checkin"><IconCheck /> Check-In</NavLink>
+        <NavLink to="/portfolio"><IconStar /> Portfolio</NavLink>
         <NavLink to="/navigate"><IconMap /> Navigate</NavLink>
         <NavLink to="/profile"><IconUser /> Profile</NavLink>
       </nav>
