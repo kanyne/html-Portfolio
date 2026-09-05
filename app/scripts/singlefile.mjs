@@ -118,6 +118,14 @@ html = html.replace('</body>', () => `  <script>\n${safeJs}\n  </script>\n</body
 
 fs.writeFileSync(out, html);
 
+// Asset paths assembled at runtime (e.g. `/img/x/${name}`) never appear as
+// literals, so they silently escape inlining. Catch the tell-tale fragment.
+const dynamic = (html.match(/["'`]\.\.\/img\/[a-z-]*\/?\$\{/g) || []).length;
+if (dynamic) {
+  console.error(`FAIL ${dynamic} image path(s) are built at runtime and cannot be inlined — use literal paths`);
+  process.exit(1);
+}
+
 const leftovers = (html.match(/(src|href)="\.?\.?\/(img|icon|assets)/g) || []).length;
 const mb = (b) => (b / 1024 / 1024).toFixed(2) + ' MB';
 console.log(

@@ -24,8 +24,6 @@ export type PortfolioItem = {
   highlights: string[];
 };
 
-const P = (f: string) => `/img/portfolio/${f}`;
-
 export const PORTFOLIO: PortfolioItem[] = [
   {
     id: 'tiktok-newfronts',
@@ -36,7 +34,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Atrium', 'Saal 1'],
     guests: '400 seated',
     layout: 'Theatre-style rows facing the grand staircase, stage built over the lower steps',
-    photo: P('tiktok-newfronts.jpg'),
+    photo: '/img/portfolio/tiktok-newfronts.jpg',
     caption: 'The atrium staircase dressed as a keynote stage, with the brand mark mounted above the landing.',
     highlights: [
       'Full-height branded backdrop hung over the staircase, plus four double-sided LED totems down the room',
@@ -53,7 +51,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Foyer', 'Atrium'],
     guests: '250 standing',
     layout: 'Press wall and red carpet in the foyer, reception flowing into the atrium',
-    photo: P('icon-legacy.jpg'),
+    photo: '/img/portfolio/icon-legacy.jpg',
     caption: 'Winners interviewed on the red carpet in front of the step-and-repeat.',
     highlights: [
       'Custom-printed press wall roughly 9 m wide, lit by the existing track spots overhead',
@@ -70,7 +68,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Wagenhalle', 'Atrium', 'Galerie'],
     guests: '1,200 across the day',
     layout: 'Numbered exhibitor booths (rows A–B) along both halls, tasting counters at each stand',
-    photo: P('weinmesse-hall.jpg'),
+    photo: '/img/portfolio/weinmesse-hall.jpg',
     caption: 'Exhibitor stands running the length of the Wagenhalle, with the box office desks at the entrance.',
     highlights: [
       'Around 40 booths on a lettered grid — A1, B20 and so on — signposted from the entrance',
@@ -87,7 +85,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Atrium', 'Galerie'],
     guests: '400 concurrent',
     layout: 'Open tasting stands under the balconies, step-free throughout',
-    photo: P('weinmesse-atrium.jpg'),
+    photo: '/img/portfolio/weinmesse-atrium.jpg',
     caption: 'Tasting stands spread beneath the three-sided balconies of the atrium.',
     highlights: [
       'Three-sided balcony lets visitors read the whole floor from above before descending',
@@ -104,7 +102,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Saal 1'],
     guests: '525 seated (sold out)',
     layout: 'Living-room set on the stage apron — two armchairs, rug, plants — cinema screen behind',
-    photo: P('kotti-kapiteln.jpg'),
+    photo: '/img/portfolio/kotti-kapiteln.jpg',
     caption: 'The set built out in front of the full cinema screen, audience raked back into the dark.',
     highlights: [
       'Cinema screen used as the scenic backdrop: artwork and book cover projected at full width',
@@ -121,7 +119,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Wagenhalle'],
     guests: '300 at long tables',
     layout: 'Long banqueting rows with white linen, numbered tables, service from both ends',
-    photo: P('gala-dinner.jpg'),
+    photo: '/img/portfolio/gala-dinner.jpg',
     caption: 'Long tables laid the length of the hall against the original brick façade.',
     highlights: [
       'Around 20 long tables with printed menus, florals and table numbers',
@@ -138,7 +136,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Wagenhalle'],
     guests: '300',
     layout: 'Same banqueting layout photographed during build, before doors',
-    photo: P('gala-daylight.jpg'),
+    photo: '/img/portfolio/gala-daylight.jpg',
     caption: 'The hall in daylight during set-up — glazed end wall, brick sides, signage to Kinos 6–10.',
     highlights: [
       'Glazed end wall floods the hall with daylight for daytime conferences and build days',
@@ -155,7 +153,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     spaces: ['Atrium', 'Kinosäle'],
     guests: '600 across the day',
     layout: 'Standing tables through the foyer, tournament play in the cinema halls',
-    photo: P('gaming-convention.jpg'),
+    photo: '/img/portfolio/gaming-convention.jpg',
     caption: 'Attendees gathered at standing tables in the foyer between rounds.',
     highlights: [
       'Cinema halls used as tournament rooms — screens and tiered seating already in place',

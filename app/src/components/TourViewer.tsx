@@ -8,15 +8,24 @@ import { IconPin } from './Icons';
  * seconds we assume the embed was refused and offer the tour in a new tab
  * instead, rather than leaving a blank rectangle on the page.
  */
+/**
+ * A page served from file:// has an opaque origin, and browsers refuse to load
+ * an https:// document into an iframe from it. Detect that up front so the
+ * single-file export offers the launch card immediately instead of showing a
+ * frame that can never fill in.
+ */
+const IS_FILE_ORIGIN =
+  typeof window !== 'undefined' && window.location.protocol === 'file:';
+
 export default function TourViewer({ initial }: { initial?: string }) {
   const first = (initial && TOUR_SCENES.find((s) => s.id === initial)) || TOUR_SCENES[0];
   const [scene, setScene] = useState<TourScene>(first);
   const [loaded, setLoaded] = useState(false);
-  const [blocked, setBlocked] = useState(false);
+  const [blocked, setBlocked] = useState(IS_FILE_ORIGIN);
   const frame = useRef<HTMLIFrameElement | null>(null);
 
   useEffect(() => {
-    if (loaded) return;
+    if (loaded || IS_FILE_ORIGIN) return;
     const t = setTimeout(() => { if (!loaded) setBlocked(true); }, 6000);
     return () => clearTimeout(t);
   }, [loaded]);
@@ -47,7 +56,9 @@ export default function TourViewer({ initial }: { initial?: string }) {
             <span style={{ color: 'var(--red)' }}><IconPin /></span>
             <b className="font-display">Open the 360° tour</b>
             <p className="small muted">
-              The tour player can’t be embedded here, but it opens fine in its own tab —
+              {IS_FILE_ORIGIN
+                ? 'This offline copy can’t embed the tour player, but it opens fine in its own tab — '
+                : 'The tour player can’t be embedded here, but it opens fine in its own tab — '}
               starting at {scene.label}.
             </p>
             <a className="btn primary" href={url} target="_blank" rel="noreferrer">Launch virtual tour</a>

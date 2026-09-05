@@ -58,7 +58,31 @@ if (external.length) {
 }
 console.log(`${imgs.length} images rendered, ${imgs.filter(i => (i.getAttribute('src')||'').startsWith('data:')).length} inlined as data URIs`);
 
-// 4. hash navigation works
+// 4. deep pages must be fully self-contained too — portfolio photos were
+//    previously built from a runtime template, so they never got inlined.
+for (const [route, label] of [['#/portfolio', 'portfolio'], ['#/navigate', 'navigate']]) {
+  window.location.hash = route;
+  window.dispatchEvent(new window.HashChangeEvent('hashchange'));
+  await new Promise(r => setTimeout(r, 300));
+  const pageImgs = [...doc.querySelectorAll('#root img')];
+  const notInlined = pageImgs.filter(i => !(i.getAttribute('src') || '').startsWith('data:'));
+  if (notInlined.length) {
+    bad(`${route}: ${notInlined.length} image(s) not inlined, e.g. ${notInlined[0].getAttribute('src')}`);
+  } else {
+    console.log(`${route}: ${pageImgs.length} images, all inlined`);
+  }
+  if (label === 'navigate') {
+    // an https iframe cannot load from a file:// origin — must offer a launch link
+    if (doc.querySelector('#root iframe')) bad('navigate embeds an iframe that cannot load from file://');
+    const tourLinks = [...doc.querySelectorAll('#root a')]
+      .filter(a => (a.getAttribute('href') || '').includes('tours.nexpics.com'));
+    if (!tourLinks.length) bad('no launchable 360 tour link on the navigate page');
+    else if (tourLinks.some(a => a.getAttribute('target') !== '_blank')) bad('tour link does not open in a new tab');
+    else console.log(`${route}: 360 tour offered as ${tourLinks.length} launch link(s)`);
+  }
+}
+
+// 5. hash navigation works
 window.location.hash = '#/portfolio';
 window.dispatchEvent(new window.HashChangeEvent('hashchange'));
 await new Promise(r => setTimeout(r, 250));
