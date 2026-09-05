@@ -12,6 +12,7 @@ import CheckIn from './pages/CheckIn';
 import NavigatePage from './pages/Navigate';
 import Profile from './pages/Profile';
 import Portfolio from './pages/Portfolio';
+import BrandGlass from './components/BrandGlass';
 import { useStore } from './store';
 import { IconCart, IconCheck, IconHome, IconMap, IconPin, IconStar, IconUser } from './components/Icons';
 
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <div className="shell">
       <header className="topbar">
+        <BrandGlass className="topbar-emboss" />
         <a className="brand" href="/" onClick={(e) => { e.preventDefault(); nav('/'); }}>
           <img className="mark" src="/icon.svg" alt="" width={32} height={32} />
           <span>COLOSSEUM<small>BERLIN · EVENTS</small></span>

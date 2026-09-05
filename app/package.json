@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "npm run build && node tests/render.mjs && node tests/logic.mjs && node tests/posters.mjs && node tests/halls.mjs && node tests/tour.mjs && npm run build:portable && node tests/portable.mjs",
+    "test": "npm run build && node tests/render.mjs && node tests/logic.mjs && node tests/posters.mjs && node tests/halls.mjs && node tests/tour.mjs && node tests/brand.mjs && npm run build:portable && node tests/portable.mjs",
     "build:portable": "tsc -b && VITE_PORTABLE=1 vite build --mode portable && node scripts/portable.mjs"
   },
   "dependencies": {
