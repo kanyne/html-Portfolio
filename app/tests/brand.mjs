@@ -22,18 +22,22 @@ await new Promise(r => setTimeout(r, 200));
 const doc = window.document;
 
 // wordmark present, centred in the header, and not announced twice to screen readers
-const mark = doc.querySelector('.topbar .topbar-emboss');
+const mark = doc.querySelector('.topbar .topbar-neon');
 if (!mark) bad('embossed wordmark not rendered in the topbar');
 else {
   if (mark.getAttribute('aria-label') !== 'Colosseum') bad('wordmark missing accessible name');
   if (mark.tagName.toLowerCase() !== 'svg') bad('wordmark should be inline svg');
-  const txt = mark.querySelector('text');
-  if (!txt || txt.textContent.trim() !== 'Colosseum') bad('wordmark text missing');
-  if (!txt.getAttribute('textLength')) bad('wordmark not width-constrained (can overflow on font fallback)');
+  // the script is baked to outlines: there must be no live <text> and so no webfont dependency
+  if (mark.querySelector('text')) bad('wordmark still uses live text (depends on a webfont)');
+  const paths = mark.querySelectorAll('path');
+  if (paths.length < 4) bad(`expected the outlined script paths, got ${paths.length}`);
+  if (!mark.querySelector('circle')) bad('red ring missing from the wordmark');
 }
 // it must sit behind the brand and cart, not intercept taps
 const css = fs.readFileSync(path.join(root, 'src', 'index.css'), 'utf8');
-if (!/\.topbar-emboss[^}]*pointer-events:\s*none/.test(css)) bad('wordmark would intercept clicks');
+if (!/\.topbar-neon[^}]*pointer-events:\s*none/.test(css)) bad('wordmark would intercept clicks');
+if (!/\.topbar-neon[^}]*mix-blend-mode:\s*screen/.test(css)) bad('wordmark not blended into the header');
+if (/Great\+Vibes/.test(css)) bad('Great Vibes webfont still requested but no longer needed');
 
 // event artwork must cover its frame — no letterboxing, so no backdrop bars
 if (/blurBackdrop/.test(fs.readFileSync(path.join(root, 'src', 'components', 'EventCard.tsx'), 'utf8'))) {
