@@ -2,13 +2,14 @@ import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import type { EventItem } from '../data/events';
 import { euro } from './ui';
+import EventImage from './EventImage';
 
 export function EventCard({ ev }: { ev: EventItem }) {
   const nav = useNavigate();
   const left = ev.capacity - ev.sold;
   return (
     <button className="card ev-card" onClick={() => nav(`/events/${ev.id}`)} aria-label={`${ev.title}, ${dayjs(ev.date).format('D MMM')}`}>
-      <img src={ev.image} alt="" loading="lazy" />
+      <EventImage ev={ev} className="ev-thumb" blurBackdrop />
       <div className="body">
         <div className="row" style={{ gap: 6 }}>
           <span className="badge red">{ev.type}</span>
@@ -16,7 +17,9 @@ export function EventCard({ ev }: { ev: EventItem }) {
         </div>
         <div className="title">{ev.title}</div>
         <div className="meta">
-          <span>{dayjs(ev.date).format('ddd, D MMM')} · {ev.time}</span>
+          <span>
+            {dayjs(ev.date).format('ddd, D MMM')} · {ev.time}
+          </span>
           <span>{ev.venueLabel}</span>
         </div>
         <div className="foot">
@@ -32,7 +35,7 @@ export function FeaturedCard({ ev }: { ev: EventItem }) {
   const nav = useNavigate();
   return (
     <button className="hero-card featured" style={{ width: '100%', textAlign: 'left' }} onClick={() => nav(`/events/${ev.id}`)}>
-      <img src={ev.image} alt="" />
+      <EventImage ev={ev} className="hero-media" blurBackdrop />
       <div className="overlay" />
       <div className="content">
         <div className="row" style={{ gap: 6, marginBottom: 6 }}>

@@ -8,6 +8,7 @@ import { BackButton, Progress, Sheet, euro, useToast } from '../components/ui';
 import { IconClock, IconHeart, IconPin, IconShare } from '../components/Icons';
 import { EventCard } from '../components/EventCard';
 import SeatPicker from '../components/SeatPicker';
+import EventImage from '../components/EventImage';
 
 export default function EventDetail() {
   const { id = '' } = useParams();
@@ -54,7 +55,7 @@ export default function EventDetail() {
   return (
     <div>
       <div className="gradient-head">
-        <img src={ev.image} alt="" />
+        <EventImage ev={ev} className="head-media" blurBackdrop />
         <div className="ov" />
         <BackButton />
         <div className="inner">

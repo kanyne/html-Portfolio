@@ -32,7 +32,10 @@ export type EventItem = {
   venueLabel: string;
   address: string;
   price: number;
+  /** Local venue photograph — always available, used as the fallback. */
   image: string;
+  /** Official event artwork from colosseumberlin.com (remote; falls back to `image`). */
+  poster?: string;
   featured?: boolean;
   capacity: number;
   sold: number;
@@ -58,6 +61,34 @@ const IMG = {
   kino: '/img/kino.jpg',
   kinoFoyer: '/img/kino-foyer.jpg',
   foyer: '/img/foyer.jpg',
+};
+
+/**
+ * Official event artwork served from the Colosseum website's CDN.
+ * `wix(id, w, h)` requests a properly cropped, quality-optimised rendition.
+ * These are remote URLs: if one fails to load the UI falls back to the
+ * local venue photograph in `image`.
+ */
+const wix = (id: string, w = 800, h = 450) =>
+  `https://static.wixstatic.com/media/${id}/v1/fill/w_${w},h_${h},al_c,q_85,usm_0.66_1.00_0.01,enc_auto/${id}`;
+
+const POSTER = {
+  gysi: 'd67bd8_8660cd93e92e412882967fd5fdffc7dc~mv2.jpg',
+  betreutesSingen: 'fb623f_766d9d8e6a12415eabe105d0131c9509~mv2.jpg',
+  babywho: 'd67bd8_4af9c1c7dba942d2873ad8a9e7fc7686~mv2.png',
+  corneliaFunke: 'fb623f_be9dd581db1b41dd8cfbff934388e18f~mv2.jpg',
+  haltungOhneHass: 'd67bd8_340e9b3f10d044df9c9e14cb71b43126~mv2.png',
+  itsAllGonnaBreak: 'fb623f_de4b3285315f416881b6bb81424b391c~mv2.jpg',
+  mindseed: 'd67bd8_191a3395297149fc912a6faf1365ec4b~mv2.jpg',
+  ueberdosisCrime: 'd67bd8_473560a651ba4979aa93d20f5dde52a1~mv2.jpg',
+  fabianRoemer: 'fb623f_ddb99145f0b24f8ca4bd022dac1cb76e~mv2.jpg',
+  kalkofe: 'd67bd8_b2e6d1e0aa654865b317abec03f43dc1~mv2.jpg',
+  beckerWittwer: 'fb623f_34c2d607ba9a4568b62efdf51949b99c~mv2.jpg',
+  irvineWelsh: 'fb623f_70f7ac0912d042fbb4e47110e34f6513~mv2.jpg',
+  josh: 'd67bd8_3b0d4c006e7d436a81fe77ba5560abd9~mv2.jpg',
+  investment: 'fb623f_6d2f2948a10d458da093534e9d1cb232~mv2.png',
+  christophKramer: 'fb623f_2c4ad0eb192845ddb651549b3668f49d~mv2.jpg',
+  annikaSala: 'd67bd8_8bf3cef3661c442ea3888f4a1ad68a0d~mv2.jpg',
 };
 
 const SCHOEN = 'Schönhauser Allee 123, 10437 Berlin';
@@ -87,6 +118,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 24,
     image: IMG.saal1,
+    poster: wix(POSTER.gysi),
     featured: true,
     capacity: 525,
     sold: 447,
@@ -115,6 +147,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 19,
     image: IMG.wagenhalle3,
+    poster: wix(POSTER.betreutesSingen),
     capacity: 600,
     sold: 512,
     short: 'You shout out your favourite hits, the band plays them — and everybody sings along.',
@@ -138,6 +171,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 75,
     image: IMG.galerie,
+    poster: wix(POSTER.babywho),
     featured: true,
     capacity: 800,
     sold: 486,
@@ -165,6 +199,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 16,
     image: IMG.saal1Stage,
+    poster: wix(POSTER.corneliaFunke),
     capacity: 525,
     sold: 498,
     seatedSelection: true,
@@ -193,6 +228,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 14,
     image: IMG.kino,
+    poster: wix(POSTER.haltungOhneHass),
     capacity: 360,
     sold: 301,
     seatedSelection: true,
@@ -220,6 +256,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 15,
     image: IMG.saal1,
+    poster: wix(POSTER.itsAllGonnaBreak),
     featured: true,
     capacity: 525,
     sold: 470,
@@ -245,6 +282,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 29,
     image: IMG.kinoFoyer,
+    poster: wix(POSTER.mindseed),
     capacity: 454,
     sold: 312,
     seatedSelection: true,
@@ -268,6 +306,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 35,
     image: IMG.wagenhalle,
+    poster: wix(POSTER.ueberdosisCrime),
     capacity: 600,
     sold: 559,
     short: 'CONTRA CREATE presents the true-crime show live on stage.',
@@ -290,6 +329,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 22,
     image: IMG.galerie2,
+    poster: wix(POSTER.fabianRoemer),
     capacity: 300,
     sold: 178,
     short: 'Album pre-listening — hear the new record before it comes out.',
@@ -313,6 +353,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 12,
     image: IMG.kino,
+    poster: wix(POSTER.kalkofe),
     capacity: 360,
     sold: 214,
     seatedSelection: true,
@@ -337,6 +378,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 18,
     image: IMG.kinoFoyer,
+    poster: wix(POSTER.beckerWittwer),
     capacity: 260,
     sold: 233,
     seatedSelection: true,
@@ -364,6 +406,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 24,
     image: IMG.saal1Stage,
+    poster: wix(POSTER.gysi),
     capacity: 525,
     sold: 389,
     seatedSelection: true,
@@ -391,6 +434,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 28,
     image: IMG.saal1,
+    poster: wix(POSTER.irvineWelsh),
     featured: true,
     capacity: 525,
     sold: 501,
@@ -419,6 +463,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 32,
     image: IMG.bar,
+    poster: wix(POSTER.josh),
     capacity: 600,
     sold: 421,
     short: 'A solo evening under the twelve-metre roof.',
@@ -442,6 +487,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 14,
     image: IMG.kino,
+    poster: wix(POSTER.investment),
     capacity: 360,
     sold: 188,
     seatedSelection: true,
@@ -465,6 +511,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 24,
     image: IMG.saal1Stage,
+    poster: wix(POSTER.gysi),
     capacity: 525,
     sold: 356,
     seatedSelection: true,
@@ -492,6 +539,7 @@ export const EVENTS: EventItem[] = [
     address: SCHOEN,
     price: 20,
     image: IMG.saal1,
+    poster: wix(POSTER.christophKramer),
     featured: true,
     capacity: 525,
     sold: 462,
@@ -517,6 +565,7 @@ export const EVENTS: EventItem[] = [
     address: GLEIM,
     price: 17,
     image: IMG.galerie,
+    poster: wix(POSTER.annikaSala),
     capacity: 300,
     sold: 121,
     short: '»Sei mutig und folge deinem Herzen« — an interactive reading.',

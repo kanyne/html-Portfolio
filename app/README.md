@@ -63,9 +63,16 @@ Bundle: ~105 KB gzipped JS + ~3 KB gzipped CSS (budget was 500 KB).
 - `tests/render.mjs` — bundles the app and mounts all 11 routes in jsdom, asserting each paints content and the 5-tab nav.
 - `tests/logic.mjs` — 32 assertions over the cart maths, promo codes, service fee, checkout, QR ticket issuance, scan states (valid / reused / invalid), scan log, wishlist, preferences, persistence, demo reset, and the wayfinding graph (elevator routing, reachability, step narration).
 
-## Photography
+## Imagery
 
-`public/img/` holds real Colosseum Berlin venue photography (Wagenhalle, the "Zu den Kinos 6–10"
+**Event artwork** is the official poster/thumbnail for each listing, loaded straight from the
+Colosseum website's CDN (see `POSTER` + `wix()` in `src/data/events.ts`). Posters arrive in very
+different aspect ratios — tall tour posters, wide film stills, small logos — so `EventImage`
+renders them *contained* over a blurred venue photo rather than cropping titles and faces out of
+frame. If the CDN is unreachable the component silently falls back to the local venue photograph
+(covered by `tests/posters.mjs`).
+
+**Venue photography:** `public/img/` holds real Colosseum Berlin venue photography (Wagenhalle, the "Zu den Kinos 6–10"
 staircase, the neon bar, Saal 1, cinema halls, Galerie and foyer levels). Replace files in place
 to swap in the official press kit — filenames are referenced from `src/data/venues.ts` and
 `src/data/events.ts`.
