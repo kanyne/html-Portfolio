@@ -66,6 +66,21 @@ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerW
 assert.deepEqual(errors,[]);
 console.log('PASS: original logo fallback, unchanged intro source, 178 gallery items, filters, pagination, video controls, viewer navigation, Escape, source error states and mobile gallery.');
 console.log('PASS: desktop/mobile routes, nine programme outlines, add/remove, quantity, persistence, physical/digital validation, order payload, WhatsApp handoff and email URI.');
+
+for(const width of [320,375,768,1440]){
+ await page.setViewportSize({width,height:900});
+ await page.goto('http://localhost:5173/#home');
+ await page.locator('.learning-ring').waitFor();
+ assert.equal(await page.locator('.infographic-service .dimensional-badge').count(),3);
+ assert.equal(await page.locator('.learning-orbit').count(),3);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'infographic home overflow '+width);
+ await page.goto('http://localhost:5173/#programmes');
+ await page.locator('.process-infographic').waitFor();
+ assert.equal(await page.locator('.process-step').count(),3);
+ assert.equal(await page.locator('.programme-badge').count(),9);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'infographic programmes overflow '+width);
+}
+console.log('PASS: dimensional service icons, source-based learning graphic, three methodology steps and nine programme icons at 320/375/768/1440px.');
 const delivery=await browser.newPage({acceptDownloads:true});
 await delivery.route('https://alkanbiz.com/**',r=>r.abort());
 await delivery.goto('file://'+path.resolve('deliverables/Alkan-Business-Consult.html'));
