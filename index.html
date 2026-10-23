@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content24 AI — Reference Video Uploader & Ad Studio</title>
+  <title>Content24 AI — 30.8s Cinema Commercial (Matched 1:1 to @zeligsound Reference)</title>
   <style>
     @font-face {
       font-family: "Plus Jakarta Sans";
@@ -11,19 +11,9 @@
       font-weight: 700;
     }
     @font-face {
-      font-family: "Plus Jakarta Sans";
-      src: url("/fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
-      font-weight: 800;
-    }
-    @font-face {
       font-family: "Space Grotesk";
       src: url("/fonts/SpaceGrotesk-Medium.ttf") format("truetype");
       font-weight: 500;
-    }
-    @font-face {
-      font-family: "Space Grotesk";
-      src: url("/fonts/SpaceGrotesk-Bold.ttf") format("truetype");
-      font-weight: 700;
     }
     @font-face {
       font-family: "Inter";
@@ -37,14 +27,13 @@
     }
 
     :root {
-      --bg: #06060b;
-      --surface: #11111e;
-      --surface-2: #19192c;
+      --bg: #050508;
+      --surface: #10101b;
+      --surface-2: #181829;
       --border: rgba(255, 255, 255, 0.12);
       --border-hi: rgba(168, 85, 247, 0.65);
       --text: #f8f8fc;
       --muted: #9ca1be;
-      --purple: #a855f7;
       --grad: linear-gradient(135deg, #8b3dff 0%, #ec4899 52%, #f97316 100%);
     }
 
@@ -52,8 +41,8 @@
 
     body {
       font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at 20% -8%, rgba(139, 61, 255, 0.2), transparent 44%),
-                  radial-gradient(circle at 80% -8%, rgba(249, 115, 22, 0.15), transparent 44%),
+      background: radial-gradient(circle at 22% -8%, rgba(139, 61, 255, 0.18), transparent 44%),
+                  radial-gradient(circle at 78% -8%, rgba(249, 115, 22, 0.14), transparent 44%),
                   var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -64,7 +53,7 @@
     .topbar {
       padding: 10px 18px;
       border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 20, 0.92);
+      background: rgba(8, 8, 16, 0.92);
       backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
@@ -76,20 +65,16 @@
       z-index: 40;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .brand { display: flex; align-items: center; gap: 10px; }
     .brand img { height: 24px; width: auto; display: block; }
     .live-pill {
       font-family: "Space Grotesk", sans-serif;
       font-size: 10.5px;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #c4b5fd;
-      background: rgba(168, 85, 247, 0.16);
-      border: 1px solid rgba(168, 85, 247, 0.45);
+      color: #86efac;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.4);
       padding: 3px 9px;
       border-radius: 999px;
     }
@@ -116,15 +101,10 @@
     .mode-tab.active {
       background: var(--surface-2);
       color: #fff;
-      box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.5);
+      box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.55);
     }
 
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -139,7 +119,6 @@
       background: var(--surface);
       color: var(--text);
     }
-    .btn:hover { border-color: rgba(255, 255, 255, 0.35); }
     .btn-primary {
       background: var(--grad);
       border: none;
@@ -152,186 +131,10 @@
       max-width: 1380px;
       width: 100%;
       margin: 0 auto;
-      padding: 16px 18px 32px;
+      padding: 16px 18px 28px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-    }
-
-    /* ============ PROMINENT REFERENCE UPLOAD CARD ============ */
-    .upload-section {
-      background: linear-gradient(180deg, rgba(26, 20, 48, 0.92), rgba(14, 14, 26, 0.96));
-      border: 2px dashed rgba(168, 85, 247, 0.65);
-      border-radius: 18px;
-      padding: 20px 22px;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.55), 0 0 40px rgba(168, 85, 247, 0.16);
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
-    }
-    .upload-section.dragover {
-      border-color: #f97316;
-      background: linear-gradient(180deg, rgba(52, 24, 68, 0.96), rgba(22, 16, 36, 0.98));
-      transform: scale(1.005);
-    }
-    .upload-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .upload-copy h2 {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 19px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-    .upload-copy p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 4px;
-      line-height: 1.45;
-    }
-    .upload-cta-btn {
-      background: var(--grad);
-      color: #fff;
-      border: none;
-      border-radius: 11px;
-      padding: 12px 20px;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 8px 26px rgba(168, 85, 247, 0.45);
-      white-space: nowrap;
-    }
-    .upload-cta-btn:hover { opacity: 0.95; }
-
-    .note-row {
-      margin-top: 12px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .note-row input {
-      flex: 1;
-      background: rgba(6, 6, 12, 0.78);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 9px 12px;
-      color: var(--text);
-      font-size: 12.5px;
-    }
-    .note-row input:focus {
-      outline: none;
-      border-color: var(--border-hi);
-    }
-
-    .progress-wrap {
-      display: none;
-      margin-top: 14px;
-      background: rgba(6, 6, 12, 0.85);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 13px;
-    }
-    .progress-wrap.visible { display: block; }
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 600;
-      color: #e9d5ff;
-      margin-bottom: 7px;
-    }
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--grad);
-      transition: width 0.15s ease;
-    }
-
-    .ref-result {
-      display: none;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      gap: 16px;
-    }
-    .ref-result.visible {
-      display: grid;
-      grid-template-columns: minmax(260px, 380px) 1fr;
-    }
-    @media (max-width: 820px) {
-      .ref-result.visible { grid-template-columns: 1fr; }
-    }
-    .ref-preview-box {
-      background: #000;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(74, 222, 128, 0.45);
-    }
-    .ref-preview-box video {
-      width: 100%;
-      max-height: 250px;
-      display: block;
-      background: #000;
-    }
-    .ready-callout {
-      background: rgba(22, 163, 74, 0.16);
-      border: 1px solid rgba(74, 222, 128, 0.5);
-      color: #dcfce7;
-      border-radius: 11px;
-      padding: 11px 14px;
-      font-size: 13px;
-      line-height: 1.45;
-      margin-bottom: 10px;
-    }
-    .meta-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 10px;
-    }
-    .meta-badge {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 7px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: #e2e8f0;
-    }
-    .frames-strip {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 6px;
-    }
-    .frames-strip img {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-    }
-    .frames-strip img:hover { border-color: #f97316; }
-
-    /* ============ VIDEO PLAYER ============ */
-    .section-label {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: -8px;
+      gap: 14px;
     }
 
     .player-shell {
@@ -340,8 +143,8 @@
       background: #000;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(168, 85, 247, 0.35);
-      box-shadow: 0 20px 65px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(168, 85, 247, 0.38);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -349,13 +152,13 @@
 
     video.hero-video {
       width: 100%;
-      max-height: 54vh;
+      max-height: 62vh;
       display: block;
       background: #000;
     }
     video.hero-video.vertical-mode {
       width: auto;
-      height: 56vh;
+      height: 64vh;
       max-width: 100%;
     }
 
@@ -364,18 +167,18 @@
       top: 14px;
       left: 14px;
       z-index: 20;
-      background: rgba(12, 12, 24, 0.85);
+      background: rgba(10, 10, 20, 0.88);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(249, 115, 22, 0.65);
+      border: 1px solid rgba(249, 115, 22, 0.7);
       color: #fff;
       padding: 8px 14px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
     }
     .unmute-floating.unmuted {
-      border-color: rgba(74, 222, 128, 0.55);
+      border-color: rgba(74, 222, 128, 0.6);
       color: #bbf7d0;
     }
 
@@ -385,12 +188,12 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       padding: 12px;
-      background: #07070e;
+      background: #06060b;
     }
     .compare-grid.active { display: grid; }
     @media (max-width: 760px) { .compare-grid.active { grid-template-columns: 1fr; } }
     .compare-pane {
-      background: #0d0d18;
+      background: #0c0c16;
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
@@ -415,16 +218,16 @@
 
     .acts-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 9px;
     }
-    @media (max-width: 820px) {
-      .acts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px) {
+      .acts-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     .act-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 11px;
       overflow: hidden;
       cursor: pointer;
       text-align: left;
@@ -436,15 +239,14 @@
       object-fit: cover;
       display: block;
     }
-    .act-meta { padding: 8px 10px; }
+    .act-meta { padding: 7px 9px; }
     .act-time {
       font-family: "Space Grotesk", sans-serif;
       font-size: 10px;
       color: #f472b6;
-      letter-spacing: 0.06em;
     }
     .act-name {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--text);
       margin-top: 2px;
@@ -455,13 +257,13 @@
   <header class="topbar">
     <div class="brand">
       <img src="/media/c24-logo-light.png" alt="Content24 AI" />
-      <span class="live-pill">Studio + Reference Uploader</span>
+      <span class="live-pill">● Matched 1:1 to @zeligsound Reference</span>
     </div>
 
     <div class="mode-tabs">
-      <button class="mode-tab active" data-mode="16:9">16:9 Widescreen</button>
-      <button class="mode-tab" data-mode="9:16">9:16 Vertical</button>
-      <button class="mode-tab" data-mode="compare">Side-by-Side Compare</button>
+      <button class="mode-tab active" data-mode="16:9">16:9 Cinema Commercial</button>
+      <button class="mode-tab" data-mode="compare">1:1 Synced Side-by-Side w/ Your Reference</button>
+      <button class="mode-tab" data-mode="9:16">9:16 Vertical Cut</button>
     </div>
 
     <div class="actions">
@@ -471,65 +273,8 @@
   </header>
 
   <main class="main-stage">
-    <!-- DIRECT REFERENCE VIDEO UPLOAD STUDIO -->
-    <section class="upload-section" id="dropZone">
-      <input
-        type="file"
-        id="refFileInput"
-        accept="video/*,.mp4,.mov,.webm,.mkv,.m4v,.gif"
-        hidden
-      />
-      <div class="upload-top">
-        <div class="upload-copy">
-          <h2>📤 Drop Your Reference Video Right Here</h2>
-          <p>
-            Drag &amp; drop any <strong>.mp4, .mov, .webm, or screen recording</strong> here (or click the button).
-            It uploads straight into the workspace, extracts every shot frame + audio beat automatically, and lets me match your exact vision.
-          </p>
-        </div>
-        <button class="upload-cta-btn" id="pickFileBtn" type="button">
-          Choose Reference Video File
-        </button>
-      </div>
-
-      <div class="note-row">
-        <input
-          type="text"
-          id="refNoteInput"
-          placeholder="Optional note: tell me what you love about your reference video (transitions, kinetic typography, camera speed, colors, music vibe...)"
-        />
-        <button class="btn" id="saveNoteBtn" type="button">Save Note</button>
-      </div>
-
-      <div class="progress-wrap" id="progressWrap">
-        <div class="progress-label">
-          <span id="progressText">Uploading reference video...</span>
-          <span id="progressPct">0%</span>
-        </div>
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progressFill"></div>
-        </div>
-      </div>
-
-      <div class="ref-result" id="refResult">
-        <div class="ref-preview-box">
-          <video id="uploadedRefPreview" controls playsinline loop></video>
-        </div>
-        <div>
-          <div class="ready-callout" id="readyCallout">
-            <strong>✅ Reference Video Received &amp; Frame-Analyzed!</strong><br />
-            Now send a quick message in the chat panel on the left (e.g. <em>"Uploaded!"</em>) so I can inspect all extracted shots &amp; rebuild your Content24 AI video ad around it.
-          </div>
-          <div class="meta-badges" id="metaBadges"></div>
-          <div class="frames-strip" id="framesStrip"></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-label">Current Draft · Content24 AI 30s Commercial</div>
-
     <div class="player-shell">
-      <button class="unmute-floating" id="unmuteBtn">🔇 Playing Muted — Click for Soundtrack</button>
+      <button class="unmute-floating" id="unmuteBtn">🔇 Playing Muted — Click to Enable @zeligsound Audio</button>
 
       <video
         id="adVideo"
@@ -545,11 +290,11 @@
       <div class="compare-grid" id="compareGrid">
         <div class="compare-pane">
           <div class="compare-head">
-            <span id="refPaneLabel">Reference Video</span>
+            <span>Your Uploaded Reference (@zeligsound · 30.8s)</span>
           </div>
           <video
             id="refVideo"
-            src="https://v1.pinimg.com/videos/iht/expMp4/b9/02/27/b9022756cfc2e411145c395d7ca2ebd5_720w.mp4"
+            src="/videos/reference-source.mp4"
             autoplay
             muted
             loop
@@ -559,7 +304,7 @@
         </div>
         <div class="compare-pane">
           <div class="compare-head">
-            <span style="color:#f9a8d4;">Your Video Ad · Content24 AI Hub (30s)</span>
+            <span style="color:#f9a8d4;">New Content24 AI Hub Commercial (1080p · 30.8s)</span>
             <a href="https://app.content24.ai/" target="_blank" rel="noreferrer" style="color:#fdba74;text-decoration:none;">app.content24.ai ↗</a>
           </div>
           <video
@@ -575,64 +320,55 @@
       </div>
     </div>
 
-    <div class="acts-grid" id="actsGrid">
-      <button class="act-card current" data-time="0.0">
-        <img class="act-thumb" src="/frames/frame_01_eye.jpg" alt="Act 1" />
+    <div class="acts-grid">
+      <button class="act-card current" data-time="1.5">
+        <img class="act-thumb" src="/frames/frame_01_eye.jpg" alt="Eye Awakening" />
         <div class="act-meta">
-          <div class="act-time">00:00 – 00:06</div>
-          <div class="act-name">01 · Eye Portal Awakening</div>
+          <div class="act-time">00:00 – 00:09</div>
+          <div class="act-name">01 · Eye Portal &amp; Silk Stream</div>
         </div>
       </button>
-      <button class="act-card" data-time="6.3">
-        <img class="act-thumb" src="/frames/frame_03_ribbons.jpg" alt="Act 2" />
+      <button class="act-card" data-time="9.5">
+        <img class="act-thumb" src="/frames/frame_03_ribbons.jpg" alt="AI Convergence" />
         <div class="act-meta">
-          <div class="act-time">00:06 – 00:13</div>
-          <div class="act-name">02 · Multimodal Silk Worlds</div>
+          <div class="act-time">00:09 – 00:13.5</div>
+          <div class="act-name">02 · AI Models Converge</div>
         </div>
       </button>
-      <button class="act-card" data-time="13.4">
-        <img class="act-thumb" src="/frames/frame_04_prism.jpg" alt="Act 3" />
+      <button class="act-card" data-time="15.3">
+        <img class="act-thumb" src="/frames/v3_vortex.jpg" alt="Vortex & Iris" />
         <div class="act-meta">
-          <div class="act-time">00:13 – 00:20</div>
-          <div class="act-name">03 · All AI Models Converge</div>
+          <div class="act-time">00:13.5 – 00:18.6</div>
+          <div class="act-name">03 · Vortex &amp; Iris Match-Cut</div>
         </div>
       </button>
-      <button class="act-card" data-time="20.6">
-        <img class="act-thumb" src="/frames/frame_05_hub.jpg" alt="Act 4" />
+      <button class="act-card" data-time="20.2">
+        <img class="act-thumb" src="/frames/v3_macro_glass.jpg" alt="Macro Glass" />
         <div class="act-meta">
-          <div class="act-time">00:20 – 00:27</div>
-          <div class="act-name">04 · Content24 Hub Reveal</div>
+          <div class="act-time">00:18.6 – 00:24.2</div>
+          <div class="act-name">04 · Silk &amp; Glass Unveil</div>
         </div>
       </button>
-      <button class="act-card" data-time="26.9">
-        <img class="act-thumb" src="/frames/frame_06_endcard.jpg" alt="Act 5" />
+      <button class="act-card" data-time="24.4">
+        <img class="act-thumb" src="/frames/frame_05_hub.jpg" alt="Content24 Hub" />
         <div class="act-meta">
-          <div class="act-time">00:27 – 00:30</div>
-          <div class="act-name">05 · Platinum End Card</div>
+          <div class="act-time">00:24.2 – 00:28.3</div>
+          <div class="act-name">05 · Content24 AI Hub Reveal</div>
+        </div>
+      </button>
+      <button class="act-card" data-time="28.5">
+        <img class="act-thumb" src="/frames/frame_06_endcard.jpg" alt="End Card" />
+        <div class="act-meta">
+          <div class="act-time">00:28.3 – 00:30.8</div>
+          <div class="act-name">06 · Luxury Black End Cards</div>
         </div>
       </button>
     </div>
   </main>
 
   <script>
-    const CHUNK_SIZE = 1024 * 1024; // 1 MB binary slices — zero proxy body-limit issues
-    const dropZone = document.getElementById("dropZone");
-    const refFileInput = document.getElementById("refFileInput");
-    const pickFileBtn = document.getElementById("pickFileBtn");
-    const refNoteInput = document.getElementById("refNoteInput");
-    const saveNoteBtn = document.getElementById("saveNoteBtn");
-    const progressWrap = document.getElementById("progressWrap");
-    const progressText = document.getElementById("progressText");
-    const progressPct = document.getElementById("progressPct");
-    const progressFill = document.getElementById("progressFill");
-    const refResult = document.getElementById("refResult");
-    const uploadedRefPreview = document.getElementById("uploadedRefPreview");
-    const metaBadges = document.getElementById("metaBadges");
-    const framesStrip = document.getElementById("framesStrip");
-
     const adVideo = document.getElementById("adVideo");
     const refVideo = document.getElementById("refVideo");
-    const refPaneLabel = document.getElementById("refPaneLabel");
     const cmpC24Video = document.getElementById("cmpC24Video");
     const compareGrid = document.getElementById("compareGrid");
     const unmuteBtn = document.getElementById("unmuteBtn");
@@ -640,155 +376,6 @@
     const actCards = document.querySelectorAll(".act-card");
 
     let currentMode = "16:9";
-
-    function renderAnalysisUI(data) {
-      const bust = "?v=" + Date.now();
-      refResult.classList.add("visible");
-      uploadedRefPreview.src = data.savedVideo + bust;
-      uploadedRefPreview.play().catch(() => {});
-
-      refVideo.src = data.savedVideo + bust;
-      refPaneLabel.textContent = "Your Uploaded Reference · " + (data.originalName || "reference.mp4");
-
-      metaBadges.innerHTML = [
-        `File: ${data.originalName}`,
-        `Duration: ${data.duration}s`,
-        `Resolution: ${data.width}×${data.height} (${data.aspect})`,
-        `${data.fps} fps`,
-        `Scene Cuts Detected: ${(data.sceneCuts || []).length}`,
-        `Audio Beats Mapped: ${(data.audioBeatPeaks || []).length}`,
-      ]
-        .map((t) => `<span class="meta-badge">${t}</span>`)
-        .join("");
-
-      const sample = (data.frames || []).filter((_, i) => i % 2 === 0).slice(0, 12);
-      framesStrip.innerHTML = sample
-        .map(
-          (f) =>
-            `<img src="${f.url}${bust}" title="Jump to ${f.timestamp}s" data-ts="${f.timestamp}" alt="Frame ${f.timestamp}s" />`
-        )
-        .join("");
-
-      framesStrip.querySelectorAll("img").forEach((img) => {
-        img.addEventListener("click", () => {
-          uploadedRefPreview.currentTime = parseFloat(img.dataset.ts);
-          uploadedRefPreview.play().catch(() => {});
-        });
-      });
-    }
-
-    async function handleFileUpload(file) {
-      if (!file) return;
-      const totalChunks = Math.max(1, Math.ceil(file.size / CHUNK_SIZE));
-      const uploadId = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-
-      progressWrap.classList.add("visible");
-      progressFill.style.width = "2%";
-      progressPct.textContent = "0%";
-      pickFileBtn.disabled = true;
-
-      try {
-        for (let i = 0; i < totalChunks; i++) {
-          const start = i * CHUNK_SIZE;
-          const end = Math.min(file.size, start + CHUNK_SIZE);
-          const slice = file.slice(start, end);
-          const mbDone = (end / (1024 * 1024)).toFixed(1);
-          const mbTotal = (file.size / (1024 * 1024)).toFixed(1);
-          progressText.textContent = `Uploading "${file.name}" (${mbDone} / ${mbTotal} MB)...`;
-
-          const url = `/api/upload-chunk?uploadId=${encodeURIComponent(uploadId)}&index=${i}&name=${encodeURIComponent(file.name)}`;
-          const res = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/octet-stream" },
-            body: slice,
-          });
-          const j = await res.json();
-          if (!res.ok || !j.ok) {
-            throw new Error(j.error || `Chunk ${i + 1} failed`);
-          }
-          const pct = Math.round(((i + 1) / totalChunks) * 85);
-          progressFill.style.width = pct + "%";
-          progressPct.textContent = pct + "%";
-        }
-
-        progressText.textContent = "Extracting 24 HD frames, scene cuts & audio beat map via FFmpeg...";
-        progressFill.style.width = "94%";
-        progressPct.textContent = "94%";
-
-        const finRes = await fetch("/api/upload-complete", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            uploadId,
-            name: file.name,
-            note: refNoteInput.value || "",
-          }),
-        });
-        const finData = await finRes.json();
-        if (!finRes.ok || !finData.ok) {
-          throw new Error(finData.error || "Video analysis failed");
-        }
-
-        progressFill.style.width = "100%";
-        progressPct.textContent = "100%";
-        progressText.textContent = `✓ "${file.name}" uploaded & analyzed! Send "Uploaded!" in chat on the left.`;
-        renderAnalysisUI(finData);
-      } catch (err) {
-        progressText.textContent = "Upload error: " + err.message;
-        progressPct.textContent = "Error";
-      } finally {
-        pickFileBtn.disabled = false;
-      }
-    }
-
-    pickFileBtn.addEventListener("click", () => refFileInput.click());
-    refFileInput.addEventListener("change", () => {
-      if (refFileInput.files && refFileInput.files[0]) {
-        handleFileUpload(refFileInput.files[0]);
-      }
-    });
-
-    ["dragenter", "dragover"].forEach((ev) => {
-      window.addEventListener(ev, (e) => {
-        e.preventDefault();
-        dropZone.classList.add("dragover");
-      });
-    });
-    ["dragleave", "drop"].forEach((ev) => {
-      window.addEventListener(ev, (e) => {
-        e.preventDefault();
-        dropZone.classList.remove("dragover");
-      });
-    });
-    window.addEventListener("drop", (e) => {
-      const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-      if (f) handleFileUpload(f);
-    });
-    window.addEventListener("paste", (e) => {
-      const items = e.clipboardData && e.clipboardData.files;
-      if (items && items[0]) handleFileUpload(items[0]);
-    });
-
-    saveNoteBtn.addEventListener("click", async () => {
-      await fetch("/api/save-note", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ note: refNoteInput.value || "" }),
-      });
-      saveNoteBtn.textContent = "✓ Saved";
-      setTimeout(() => (saveNoteBtn.textContent = "Save Note"), 1800);
-    });
-
-    // Restore any already-uploaded reference video on reload
-    fetch("/api/reference-status")
-      .then((r) => r.json())
-      .then((st) => {
-        if (st.note) refNoteInput.value = st.note;
-        if (st.uploaded && st.analysis) renderAnalysisUI(st.analysis);
-      })
-      .catch(() => {});
-
-    // Commercial player controls
     adVideo.play().catch(() => {});
 
     unmuteBtn.addEventListener("click", () => {
@@ -796,12 +383,13 @@
       const nowMuted = !target.muted;
       adVideo.muted = nowMuted;
       cmpC24Video.muted = nowMuted;
+      refVideo.muted = true; // Prevent double audio echo during side-by-side sync
       target.play().catch(() => {});
       if (!nowMuted) {
-        unmuteBtn.textContent = "🔊 Soundtrack Active (Click to Mute)";
+        unmuteBtn.textContent = "🔊 @zeligsound Audio Active (Click to Mute)";
         unmuteBtn.classList.add("unmuted");
       } else {
-        unmuteBtn.textContent = "🔇 Playing Muted — Click for Soundtrack";
+        unmuteBtn.textContent = "🔇 Playing Muted — Click to Enable @zeligsound Audio";
         unmuteBtn.classList.remove("unmuted");
       }
     });
@@ -810,15 +398,19 @@
       return currentMode === "compare" ? cmpC24Video : adVideo;
     }
 
-    adVideo.addEventListener("timeupdate", () => {
+    function updateCards() {
       const t = activeVideo().currentTime || 0;
       let idx = 0;
-      if (t >= 26.8) idx = 4;
-      else if (t >= 20.4) idx = 3;
-      else if (t >= 13.2) idx = 2;
-      else if (t >= 6.2) idx = 1;
+      if (t >= 28.3) idx = 5;
+      else if (t >= 24.2) idx = 4;
+      else if (t >= 18.6) idx = 3;
+      else if (t >= 13.5) idx = 2;
+      else if (t >= 9.4) idx = 1;
       actCards.forEach((c, i) => c.classList.toggle("current", i === idx));
-    });
+    }
+
+    adVideo.addEventListener("timeupdate", updateCards);
+    cmpC24Video.addEventListener("timeupdate", updateCards);
 
     actCards.forEach((card) => {
       card.addEventListener("click", () => {
@@ -826,6 +418,10 @@
         const v = activeVideo();
         v.currentTime = t;
         v.play().catch(() => {});
+        if (currentMode === "compare") {
+          refVideo.currentTime = t;
+          refVideo.play().catch(() => {});
+        }
       });
     });
 
@@ -841,7 +437,7 @@
           adVideo.style.display = "none";
           compareGrid.classList.add("active");
           cmpC24Video.currentTime = prevT;
-          refVideo.currentTime = 0;
+          refVideo.currentTime = prevT;
           cmpC24Video.play().catch(() => {});
           refVideo.play().catch(() => {});
         } else {
