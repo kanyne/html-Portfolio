@@ -1,14 +1,109 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 const { spawn } = require("child_process");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const UPLOADS_DIR = path.join(__dirname, "uploads");
+fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
-app.use(express.json({ limit: "1mb" }));
+// 1. Chunked raw binary upload route MUST come before express.json()
+//    1 MB slices bypass any reverse-proxy body size caps cleanly.
+app.post(
+  "/api/upload-chunk",
+  express.raw({ type: "*/*", limit: "6mb" }),
+  (req, res) => {
+    try {
+      const rawId = String(req.query.uploadId || "default").replace(/[^a-zA-Z0-9_-]/g, "");
+      const ext = path.extname(String(req.query.name || "video.mp4")).replace(/[^.a-zA-Z0-9]/g, "") || ".mp4";
+      const index = Number(req.query.index || 0);
+      const tmpPath = path.join(os.tmpdir(), `c24_ref_${rawId}${ext}`);
+
+      if (index === 0 && fs.existsSync(tmpPath)) {
+        fs.unlinkSync(tmpPath);
+      }
+      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
+        return res.status(400).json({ ok: false, error: "Empty chunk payload" });
+      }
+      fs.appendFileSync(tmpPath, req.body);
+      const stat = fs.statSync(tmpPath);
+      return res.json({ ok: true, index, receivedBytes: stat.size });
+    } catch (err) {
+      return res.status(500).json({ ok: false, error: err.message });
+    }
+  }
+);
+
+app.use(express.json({ limit: "2mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
+app.use("/uploads", express.static(UPLOADS_DIR));
+
+// Finalize uploaded chunks -> FFmpeg transcode + 24-frame extraction + cut/beat analysis
+app.post("/api/upload-complete", (req, res) => {
+  const rawId = String(req.body?.uploadId || "default").replace(/[^a-zA-Z0-9_-]/g, "");
+  const origName = String(req.body?.name || "reference.mp4");
+  const note = String(req.body?.note || "").trim();
+  const ext = path.extname(origName).replace(/[^.a-zA-Z0-9]/g, "") || ".mp4";
+  const tmpPath = path.join(os.tmpdir(), `c24_ref_${rawId}${ext}`);
+
+  if (!fs.existsSync(tmpPath)) {
+    return res.status(404).json({ ok: false, error: "Uploaded file chunks not found on server." });
+  }
+
+  if (note) {
+    fs.writeFileSync(path.join(UPLOADS_DIR, "user_note.txt"), note, "utf8");
+  }
+
+  const py = spawn("python3", ["scripts/analyze_reference.py", tmpPath, origName], {
+    cwd: __dirname,
+  });
+
+  let stdout = "";
+  let stderr = "";
+  py.stdout.on("data", (d) => (stdout += d.toString()));
+  py.stderr.on("data", (d) => (stderr += d.toString()));
+
+  py.on("close", (code) => {
+    try {
+      if (fs.existsSync(tmpPath)) fs.unlinkSync(tmpPath);
+    } catch (_e) {}
+
+    if (code !== 0) {
+      return res.status(500).json({
+        ok: false,
+        error: "FFmpeg analysis failed: " + (stderr || stdout).slice(-400),
+      });
+    }
+    try {
+      const parsed = JSON.parse(stdout.trim().split("\n").pop());
+      return res.json(parsed);
+    } catch (e) {
+      return res.status(500).json({ ok: false, error: "Parse error: " + e.message });
+    }
+  });
+});
+
+app.post("/api/save-note", (req, res) => {
+  const note = String(req.body?.note || "").trim();
+  fs.writeFileSync(path.join(UPLOADS_DIR, "user_note.txt"), note, "utf8");
+  res.json({ ok: true });
+});
+
+app.get("/api/reference-status", (_req, res) => {
+  const analysisPath = path.join(UPLOADS_DIR, "analysis.json");
+  const notePath = path.join(UPLOADS_DIR, "user_note.txt");
+  const note = fs.existsSync(notePath) ? fs.readFileSync(notePath, "utf8") : "";
+  if (fs.existsSync(analysisPath)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(analysisPath, "utf8"));
+      return res.json({ ok: true, uploaded: true, note, analysis: data });
+    } catch (_e) {}
+  }
+  return res.json({ ok: true, uploaded: false, note });
+});
 
 let renderInProgress = false;
 let renderStatus = { state: "idle", message: "Ready", updatedAt: Date.now() };
@@ -69,16 +164,6 @@ app.post("/api/render", (req, res) => {
   child.on("close", (code) => {
     renderInProgress = false;
     if (code === 0) {
-      try {
-        fs.copyFileSync(
-          path.join(__dirname, "public/videos/content24-ad-16x9.mp4"),
-          path.join(__dirname, "Content24-Ad-16x9.mp4")
-        );
-        fs.copyFileSync(
-          path.join(__dirname, "public/videos/content24-ad-9x16.mp4"),
-          path.join(__dirname, "Content24-Ad-9x16.mp4")
-        );
-      } catch (_e) {}
       renderStatus = {
         state: "done",
         message: "Render complete — HD MP4 updated!",

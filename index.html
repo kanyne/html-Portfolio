@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content24 AI — 30s Commercial Video Player</title>
+  <title>Content24 AI — Reference Video Uploader & Ad Studio</title>
   <style>
     @font-face {
       font-family: "Plus Jakarta Sans";
@@ -40,8 +40,8 @@
       --bg: #06060b;
       --surface: #11111e;
       --surface-2: #19192c;
-      --border: rgba(255, 255, 255, 0.11);
-      --border-hi: rgba(168, 85, 247, 0.55);
+      --border: rgba(255, 255, 255, 0.12);
+      --border-hi: rgba(168, 85, 247, 0.65);
       --text: #f8f8fc;
       --muted: #9ca1be;
       --purple: #a855f7;
@@ -52,8 +52,8 @@
 
     body {
       font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at 20% -8%, rgba(139, 61, 255, 0.18), transparent 44%),
-                  radial-gradient(circle at 80% -8%, rgba(249, 115, 22, 0.14), transparent 44%),
+      background: radial-gradient(circle at 20% -8%, rgba(139, 61, 255, 0.2), transparent 44%),
+                  radial-gradient(circle at 80% -8%, rgba(249, 115, 22, 0.15), transparent 44%),
                   var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -64,7 +64,7 @@
     .topbar {
       padding: 10px 18px;
       border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 20, 0.9);
+      background: rgba(10, 10, 20, 0.92);
       backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
@@ -85,11 +85,11 @@
     .live-pill {
       font-family: "Space Grotesk", sans-serif;
       font-size: 10.5px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: #86efac;
-      background: rgba(34, 197, 94, 0.14);
-      border: 1px solid rgba(74, 222, 128, 0.35);
+      color: #c4b5fd;
+      background: rgba(168, 85, 247, 0.16);
+      border: 1px solid rgba(168, 85, 247, 0.45);
       padding: 3px 9px;
       border-radius: 999px;
     }
@@ -152,10 +152,186 @@
       max-width: 1380px;
       width: 100%;
       margin: 0 auto;
-      padding: 16px 18px 28px;
+      padding: 16px 18px 32px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+    }
+
+    /* ============ PROMINENT REFERENCE UPLOAD CARD ============ */
+    .upload-section {
+      background: linear-gradient(180deg, rgba(26, 20, 48, 0.92), rgba(14, 14, 26, 0.96));
+      border: 2px dashed rgba(168, 85, 247, 0.65);
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.55), 0 0 40px rgba(168, 85, 247, 0.16);
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    }
+    .upload-section.dragover {
+      border-color: #f97316;
+      background: linear-gradient(180deg, rgba(52, 24, 68, 0.96), rgba(22, 16, 36, 0.98));
+      transform: scale(1.005);
+    }
+    .upload-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .upload-copy h2 {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .upload-copy p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+    .upload-cta-btn {
+      background: var(--grad);
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      padding: 12px 20px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 26px rgba(168, 85, 247, 0.45);
+      white-space: nowrap;
+    }
+    .upload-cta-btn:hover { opacity: 0.95; }
+
+    .note-row {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .note-row input {
+      flex: 1;
+      background: rgba(6, 6, 12, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-size: 12.5px;
+    }
+    .note-row input:focus {
+      outline: none;
+      border-color: var(--border-hi);
+    }
+
+    .progress-wrap {
+      display: none;
+      margin-top: 14px;
+      background: rgba(6, 6, 12, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+    .progress-wrap.visible { display: block; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e9d5ff;
+      margin-bottom: 7px;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--grad);
+      transition: width 0.15s ease;
+    }
+
+    .ref-result {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      gap: 16px;
+    }
+    .ref-result.visible {
+      display: grid;
+      grid-template-columns: minmax(260px, 380px) 1fr;
+    }
+    @media (max-width: 820px) {
+      .ref-result.visible { grid-template-columns: 1fr; }
+    }
+    .ref-preview-box {
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(74, 222, 128, 0.45);
+    }
+    .ref-preview-box video {
+      width: 100%;
+      max-height: 250px;
+      display: block;
+      background: #000;
+    }
+    .ready-callout {
+      background: rgba(22, 163, 74, 0.16);
+      border: 1px solid rgba(74, 222, 128, 0.5);
+      color: #dcfce7;
+      border-radius: 11px;
+      padding: 11px 14px;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+    .meta-badge {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 7px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+    }
+    .frames-strip {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .frames-strip img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .frames-strip img:hover { border-color: #f97316; }
+
+    /* ============ VIDEO PLAYER ============ */
+    .section-label {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: -8px;
     }
 
     .player-shell {
@@ -165,7 +341,7 @@
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(168, 85, 247, 0.35);
-      box-shadow: 0 20px 65px rgba(0, 0, 0, 0.7), 0 0 45px rgba(168, 85, 247, 0.14);
+      box-shadow: 0 20px 65px rgba(0, 0, 0, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -173,13 +349,13 @@
 
     video.hero-video {
       width: 100%;
-      max-height: 60vh;
+      max-height: 54vh;
       display: block;
       background: #000;
     }
     video.hero-video.vertical-mode {
       width: auto;
-      height: 62vh;
+      height: 56vh;
       max-width: 100%;
     }
 
@@ -194,10 +370,9 @@
       color: #fff;
       padding: 8px 14px;
       border-radius: 999px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
     .unmute-floating.unmuted {
       border-color: rgba(74, 222, 128, 0.55);
@@ -238,7 +413,6 @@
       background: #000;
     }
 
-    /* 5-Act Scene Jump Strip */
     .acts-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -254,12 +428,8 @@
       overflow: hidden;
       cursor: pointer;
       text-align: left;
-      transition: transform 0.15s ease, border-color 0.15s ease;
     }
-    .act-card:hover, .act-card.current {
-      border-color: var(--border-hi);
-      transform: translateY(-2px);
-    }
+    .act-card:hover, .act-card.current { border-color: var(--border-hi); }
     .act-thumb {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -279,71 +449,87 @@
       color: var(--text);
       margin-top: 2px;
     }
-
-    /* Collapsible Custom Copy Editor Drawer */
-    .drawer {
-      display: none;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      gap: 12px;
-    }
-    .drawer.open {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    }
-    .field { display: flex; flex-direction: column; gap: 5px; }
-    .field label {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 10.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: #c4b5fd;
-    }
-    .field input {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 10px;
-      color: var(--text);
-      font-size: 12.5px;
-    }
-    .status-banner {
-      grid-column: 1 / -1;
-      padding: 10px 12px;
-      border-radius: 9px;
-      background: rgba(168, 85, 247, 0.14);
-      border: 1px solid rgba(168, 85, 247, 0.35);
-      font-size: 12px;
-      color: #f3e8ff;
-      display: none;
-    }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
       <img src="/media/c24-logo-light.png" alt="Content24 AI" />
-      <span class="live-pill">● 30s Commercial Playing</span>
+      <span class="live-pill">Studio + Reference Uploader</span>
     </div>
 
     <div class="mode-tabs">
-      <button class="mode-tab active" data-mode="16:9">16:9 Widescreen Video</button>
-      <button class="mode-tab" data-mode="9:16">9:16 Vertical Video</button>
-      <button class="mode-tab" data-mode="compare">Compare w/ Reference Pin</button>
+      <button class="mode-tab active" data-mode="16:9">16:9 Widescreen</button>
+      <button class="mode-tab" data-mode="9:16">9:16 Vertical</button>
+      <button class="mode-tab" data-mode="compare">Side-by-Side Compare</button>
     </div>
 
     <div class="actions">
-      <button class="btn" id="toggleEditBtn">✎ Edit Copy / Re-Render</button>
       <a class="btn" href="/download/9x16">⬇ Download 9:16 MP4</a>
       <a class="btn btn-primary" href="/download/16x9">⬇ Download 16:9 HD MP4</a>
     </div>
   </header>
 
   <main class="main-stage">
+    <!-- DIRECT REFERENCE VIDEO UPLOAD STUDIO -->
+    <section class="upload-section" id="dropZone">
+      <input
+        type="file"
+        id="refFileInput"
+        accept="video/*,.mp4,.mov,.webm,.mkv,.m4v,.gif"
+        hidden
+      />
+      <div class="upload-top">
+        <div class="upload-copy">
+          <h2>📤 Drop Your Reference Video Right Here</h2>
+          <p>
+            Drag &amp; drop any <strong>.mp4, .mov, .webm, or screen recording</strong> here (or click the button).
+            It uploads straight into the workspace, extracts every shot frame + audio beat automatically, and lets me match your exact vision.
+          </p>
+        </div>
+        <button class="upload-cta-btn" id="pickFileBtn" type="button">
+          Choose Reference Video File
+        </button>
+      </div>
+
+      <div class="note-row">
+        <input
+          type="text"
+          id="refNoteInput"
+          placeholder="Optional note: tell me what you love about your reference video (transitions, kinetic typography, camera speed, colors, music vibe...)"
+        />
+        <button class="btn" id="saveNoteBtn" type="button">Save Note</button>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label">
+          <span id="progressText">Uploading reference video...</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="ref-result" id="refResult">
+        <div class="ref-preview-box">
+          <video id="uploadedRefPreview" controls playsinline loop></video>
+        </div>
+        <div>
+          <div class="ready-callout" id="readyCallout">
+            <strong>✅ Reference Video Received &amp; Frame-Analyzed!</strong><br />
+            Now send a quick message in the chat panel on the left (e.g. <em>"Uploaded!"</em>) so I can inspect all extracted shots &amp; rebuild your Content24 AI video ad around it.
+          </div>
+          <div class="meta-badges" id="metaBadges"></div>
+          <div class="frames-strip" id="framesStrip"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-label">Current Draft · Content24 AI 30s Commercial</div>
+
     <div class="player-shell">
-      <button class="unmute-floating" id="unmuteBtn">🔇 Playing Muted — Click for Zelig Soundtrack</button>
+      <button class="unmute-floating" id="unmuteBtn">🔇 Playing Muted — Click for Soundtrack</button>
 
       <video
         id="adVideo"
@@ -359,8 +545,7 @@
       <div class="compare-grid" id="compareGrid">
         <div class="compare-pane">
           <div class="compare-head">
-            <span>Reference Pin · FutureDeluxe × Zelig (30s)</span>
-            <a href="https://www.pinterest.com/pin/7599893117933071/" target="_blank" rel="noreferrer" style="color:#c4b5fd;text-decoration:none;">Pinterest ↗</a>
+            <span id="refPaneLabel">Reference Video</span>
           </div>
           <video
             id="refVideo"
@@ -427,61 +612,183 @@
         </div>
       </button>
     </div>
-
-    <section class="drawer" id="editDrawer">
-      <div class="field">
-        <label>Act I · Hook Headline</label>
-        <input id="f_act1_title" value="Every great idea starts with a vision." />
-      </div>
-      <div class="field">
-        <label>Act I · Subtitle</label>
-        <input id="f_act1_sub" value="Why scatter yours across a dozen AI tools?" />
-      </div>
-      <div class="field">
-        <label>Act II · Multimodal Headline</label>
-        <input id="f_act2_title" value="Write. Design. Film. Automate." />
-      </div>
-      <div class="field">
-        <label>Act III · Convergence Line 1</label>
-        <input id="f_act3_title_1" value="Every flagship AI." />
-      </div>
-      <div class="field">
-        <label>Act III · Convergence Line 2</label>
-        <input id="f_act3_title_2" value="One unified hub." />
-      </div>
-      <div class="field">
-        <label>Act IV · Hub Reveal Headline</label>
-        <input id="f_act4_title" value="Meet Content24 AI" />
-      </div>
-      <div class="field">
-        <label>Act V · End Tagline</label>
-        <input id="f_act5_tagline" value="EVERYTHING AI.  ONE HUB." />
-      </div>
-      <div class="field">
-        <label>Act V · CTA URL</label>
-        <input id="f_act5_cta" value="app.content24.ai" />
-      </div>
-      <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end;">
-        <button class="btn btn-primary" id="rerenderBtn" style="padding:10px 20px;">⚡ Re-Render 1080p MP4s on Server</button>
-      </div>
-      <div class="status-banner" id="statusBox"></div>
-    </section>
   </main>
 
   <script>
+    const CHUNK_SIZE = 1024 * 1024; // 1 MB binary slices — zero proxy body-limit issues
+    const dropZone = document.getElementById("dropZone");
+    const refFileInput = document.getElementById("refFileInput");
+    const pickFileBtn = document.getElementById("pickFileBtn");
+    const refNoteInput = document.getElementById("refNoteInput");
+    const saveNoteBtn = document.getElementById("saveNoteBtn");
+    const progressWrap = document.getElementById("progressWrap");
+    const progressText = document.getElementById("progressText");
+    const progressPct = document.getElementById("progressPct");
+    const progressFill = document.getElementById("progressFill");
+    const refResult = document.getElementById("refResult");
+    const uploadedRefPreview = document.getElementById("uploadedRefPreview");
+    const metaBadges = document.getElementById("metaBadges");
+    const framesStrip = document.getElementById("framesStrip");
+
     const adVideo = document.getElementById("adVideo");
     const refVideo = document.getElementById("refVideo");
+    const refPaneLabel = document.getElementById("refPaneLabel");
     const cmpC24Video = document.getElementById("cmpC24Video");
     const compareGrid = document.getElementById("compareGrid");
     const unmuteBtn = document.getElementById("unmuteBtn");
     const modeTabs = document.querySelectorAll(".mode-tab");
     const actCards = document.querySelectorAll(".act-card");
-    const toggleEditBtn = document.getElementById("toggleEditBtn");
-    const editDrawer = document.getElementById("editDrawer");
 
     let currentMode = "16:9";
-    let cacheBust = "";
 
+    function renderAnalysisUI(data) {
+      const bust = "?v=" + Date.now();
+      refResult.classList.add("visible");
+      uploadedRefPreview.src = data.savedVideo + bust;
+      uploadedRefPreview.play().catch(() => {});
+
+      refVideo.src = data.savedVideo + bust;
+      refPaneLabel.textContent = "Your Uploaded Reference · " + (data.originalName || "reference.mp4");
+
+      metaBadges.innerHTML = [
+        `File: ${data.originalName}`,
+        `Duration: ${data.duration}s`,
+        `Resolution: ${data.width}×${data.height} (${data.aspect})`,
+        `${data.fps} fps`,
+        `Scene Cuts Detected: ${(data.sceneCuts || []).length}`,
+        `Audio Beats Mapped: ${(data.audioBeatPeaks || []).length}`,
+      ]
+        .map((t) => `<span class="meta-badge">${t}</span>`)
+        .join("");
+
+      const sample = (data.frames || []).filter((_, i) => i % 2 === 0).slice(0, 12);
+      framesStrip.innerHTML = sample
+        .map(
+          (f) =>
+            `<img src="${f.url}${bust}" title="Jump to ${f.timestamp}s" data-ts="${f.timestamp}" alt="Frame ${f.timestamp}s" />`
+        )
+        .join("");
+
+      framesStrip.querySelectorAll("img").forEach((img) => {
+        img.addEventListener("click", () => {
+          uploadedRefPreview.currentTime = parseFloat(img.dataset.ts);
+          uploadedRefPreview.play().catch(() => {});
+        });
+      });
+    }
+
+    async function handleFileUpload(file) {
+      if (!file) return;
+      const totalChunks = Math.max(1, Math.ceil(file.size / CHUNK_SIZE));
+      const uploadId = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+      progressWrap.classList.add("visible");
+      progressFill.style.width = "2%";
+      progressPct.textContent = "0%";
+      pickFileBtn.disabled = true;
+
+      try {
+        for (let i = 0; i < totalChunks; i++) {
+          const start = i * CHUNK_SIZE;
+          const end = Math.min(file.size, start + CHUNK_SIZE);
+          const slice = file.slice(start, end);
+          const mbDone = (end / (1024 * 1024)).toFixed(1);
+          const mbTotal = (file.size / (1024 * 1024)).toFixed(1);
+          progressText.textContent = `Uploading "${file.name}" (${mbDone} / ${mbTotal} MB)...`;
+
+          const url = `/api/upload-chunk?uploadId=${encodeURIComponent(uploadId)}&index=${i}&name=${encodeURIComponent(file.name)}`;
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/octet-stream" },
+            body: slice,
+          });
+          const j = await res.json();
+          if (!res.ok || !j.ok) {
+            throw new Error(j.error || `Chunk ${i + 1} failed`);
+          }
+          const pct = Math.round(((i + 1) / totalChunks) * 85);
+          progressFill.style.width = pct + "%";
+          progressPct.textContent = pct + "%";
+        }
+
+        progressText.textContent = "Extracting 24 HD frames, scene cuts & audio beat map via FFmpeg...";
+        progressFill.style.width = "94%";
+        progressPct.textContent = "94%";
+
+        const finRes = await fetch("/api/upload-complete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            uploadId,
+            name: file.name,
+            note: refNoteInput.value || "",
+          }),
+        });
+        const finData = await finRes.json();
+        if (!finRes.ok || !finData.ok) {
+          throw new Error(finData.error || "Video analysis failed");
+        }
+
+        progressFill.style.width = "100%";
+        progressPct.textContent = "100%";
+        progressText.textContent = `✓ "${file.name}" uploaded & analyzed! Send "Uploaded!" in chat on the left.`;
+        renderAnalysisUI(finData);
+      } catch (err) {
+        progressText.textContent = "Upload error: " + err.message;
+        progressPct.textContent = "Error";
+      } finally {
+        pickFileBtn.disabled = false;
+      }
+    }
+
+    pickFileBtn.addEventListener("click", () => refFileInput.click());
+    refFileInput.addEventListener("change", () => {
+      if (refFileInput.files && refFileInput.files[0]) {
+        handleFileUpload(refFileInput.files[0]);
+      }
+    });
+
+    ["dragenter", "dragover"].forEach((ev) => {
+      window.addEventListener(ev, (e) => {
+        e.preventDefault();
+        dropZone.classList.add("dragover");
+      });
+    });
+    ["dragleave", "drop"].forEach((ev) => {
+      window.addEventListener(ev, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove("dragover");
+      });
+    });
+    window.addEventListener("drop", (e) => {
+      const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) handleFileUpload(f);
+    });
+    window.addEventListener("paste", (e) => {
+      const items = e.clipboardData && e.clipboardData.files;
+      if (items && items[0]) handleFileUpload(items[0]);
+    });
+
+    saveNoteBtn.addEventListener("click", async () => {
+      await fetch("/api/save-note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ note: refNoteInput.value || "" }),
+      });
+      saveNoteBtn.textContent = "✓ Saved";
+      setTimeout(() => (saveNoteBtn.textContent = "Save Note"), 1800);
+    });
+
+    // Restore any already-uploaded reference video on reload
+    fetch("/api/reference-status")
+      .then((r) => r.json())
+      .then((st) => {
+        if (st.note) refNoteInput.value = st.note;
+        if (st.uploaded && st.analysis) renderAnalysisUI(st.analysis);
+      })
+      .catch(() => {});
+
+    // Commercial player controls
     adVideo.play().catch(() => {});
 
     unmuteBtn.addEventListener("click", () => {
@@ -491,10 +798,10 @@
       cmpC24Video.muted = nowMuted;
       target.play().catch(() => {});
       if (!nowMuted) {
-        unmuteBtn.textContent = "🔊 Zelig Soundtrack Active (Click to Mute)";
+        unmuteBtn.textContent = "🔊 Soundtrack Active (Click to Mute)";
         unmuteBtn.classList.add("unmuted");
       } else {
-        unmuteBtn.textContent = "🔇 Playing Muted — Click for Zelig Soundtrack";
+        unmuteBtn.textContent = "🔇 Playing Muted — Click for Soundtrack";
         unmuteBtn.classList.remove("unmuted");
       }
     });
@@ -503,7 +810,7 @@
       return currentMode === "compare" ? cmpC24Video : adVideo;
     }
 
-    function updateHighlight() {
+    adVideo.addEventListener("timeupdate", () => {
       const t = activeVideo().currentTime || 0;
       let idx = 0;
       if (t >= 26.8) idx = 4;
@@ -511,10 +818,7 @@
       else if (t >= 13.2) idx = 2;
       else if (t >= 6.2) idx = 1;
       actCards.forEach((c, i) => c.classList.toggle("current", i === idx));
-    }
-
-    adVideo.addEventListener("timeupdate", updateHighlight);
-    cmpC24Video.addEventListener("timeupdate", updateHighlight);
+    });
 
     actCards.forEach((card) => {
       card.addEventListener("click", () => {
@@ -522,10 +826,6 @@
         const v = activeVideo();
         v.currentTime = t;
         v.play().catch(() => {});
-        if (currentMode === "compare") {
-          refVideo.currentTime = t;
-          refVideo.play().catch(() => {});
-        }
       });
     });
 
@@ -541,7 +841,7 @@
           adVideo.style.display = "none";
           compareGrid.classList.add("active");
           cmpC24Video.currentTime = prevT;
-          refVideo.currentTime = prevT;
+          refVideo.currentTime = 0;
           cmpC24Video.play().catch(() => {});
           refVideo.play().catch(() => {});
         } else {
@@ -551,65 +851,11 @@
           adVideo.style.display = "block";
           const vert = currentMode === "9:16";
           adVideo.classList.toggle("vertical-mode", vert);
-          adVideo.src = (vert ? "/videos/content24-ad-9x16.mp4" : "/videos/content24-ad-16x9.mp4") + cacheBust;
+          adVideo.src = vert ? "/videos/content24-ad-9x16.mp4" : "/videos/content24-ad-16x9.mp4";
           adVideo.currentTime = prevT;
           adVideo.play().catch(() => {});
         }
       });
-    });
-
-    toggleEditBtn.addEventListener("click", () => {
-      editDrawer.classList.toggle("open");
-      if (editDrawer.classList.contains("open")) {
-        editDrawer.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-
-    const rerenderBtn = document.getElementById("rerenderBtn");
-    const statusBox = document.getElementById("statusBox");
-
-    rerenderBtn.addEventListener("click", async () => {
-      const copy = {
-        act1_title: document.getElementById("f_act1_title").value,
-        act1_sub: document.getElementById("f_act1_sub").value,
-        act2_title: document.getElementById("f_act2_title").value,
-        act3_title_1: document.getElementById("f_act3_title_1").value,
-        act3_title_2: document.getElementById("f_act3_title_2").value,
-        act4_title: document.getElementById("f_act4_title").value,
-        act5_tagline: document.getElementById("f_act5_tagline").value,
-        act5_cta: document.getElementById("f_act5_cta").value,
-      };
-      rerenderBtn.disabled = true;
-      statusBox.style.display = "block";
-      statusBox.textContent = "Rendering updated 1080p MP4s on server...";
-
-      try {
-        const res = await fetch("/api/render", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ copy, format: "both" }),
-        });
-        const data = await res.json();
-        if (!data.ok) throw new Error(data.error || "Render failed");
-
-        const poll = setInterval(async () => {
-          const st = await (await fetch("/api/status")).json();
-          statusBox.textContent = st.renderStatus.message;
-          if (!st.renderInProgress) {
-            clearInterval(poll);
-            rerenderBtn.disabled = false;
-            if (st.renderStatus.state === "done") {
-              cacheBust = "?t=" + Date.now();
-              adVideo.src = (currentMode === "9:16" ? "/videos/content24-ad-9x16.mp4" : "/videos/content24-ad-16x9.mp4") + cacheBust;
-              cmpC24Video.src = "/videos/content24-ad-16x9.mp4" + cacheBust;
-              adVideo.play().catch(() => {});
-            }
-          }
-        }, 1800);
-      } catch (e) {
-        statusBox.textContent = "Error: " + e.message;
-        rerenderBtn.disabled = false;
-      }
     });
   </script>
 </body>
